@@ -59,13 +59,14 @@
 .flagshipCard {
   grid-column: span 2;
   grid-row: span 2;
-  background: linear-gradient(135deg, rgba(62, 166, 255, 0.07) 0%, rgba(33, 33, 33, 0.45) 100%);
-  border-color: rgba(62, 166, 255, 0.15);
+  background: linear-gradient(135deg, rgba(62, 166, 255, 0.04) 0%, rgba(33, 33, 33, 0.45) 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 1.25rem; /* slightly less padding to fit the app frame */
 }
 
 .flagshipCard:hover {
-  border-color: rgba(62, 166, 255, 0.45);
-  box-shadow: 0 12px 30px rgba(62, 166, 255, 0.15);
+  border-color: rgba(62, 166, 255, 0.35);
+  box-shadow: 0 12px 30px rgba(62, 166, 255, 0.1);
 }
 
 .cardTitle {
@@ -84,13 +85,13 @@
 /* Badge */
 .badge {
   display: inline-block;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: var(--accent);
   background: rgba(62, 166, 255, 0.15);
-  padding: 0.25rem 0.6rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 9999px;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -101,423 +102,534 @@
   align-items: flex-start;
   gap: 1.5rem;
   margin-bottom: 0.5rem;
+  padding: 0 0.5rem;
 }
 
-/* timematrix Demo Layout */
-.demoLayoutGrid {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
-  align-items: stretch;
-}
-
-/* Left Side: Timer Control */
-.timerControlPanel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.timerDisplayCard {
-  background: rgba(0, 0, 0, 0.35);
+/* High Fidelity Desktop App Mockup Frame */
+.appContainerFrame {
+  background: #f9fafb; /* Light Gray */
   border-radius: 12px;
-  padding: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  text-align: center;
+  border: 1px solid #d1d5db;
+  overflow: hidden;
+  color: #111827; /* Dark Gray text */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  flex-grow: 1;
+  width: 100%;
 }
 
-.timerHeaderRow {
+.appTopBar {
+  background: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.45rem 1rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.windowControls {
+  display: flex;
+  gap: 0.35rem;
+  z-index: 10;
+}
+
+.dotRed, .dotYellow, .dotGreen {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dotRed { background: #ff5f56; }
+.dotYellow { background: #ffbd2e; }
+.dotGreen { background: #27c93f; }
+
+.windowTitle {
+  font-size: 0.7rem;
+  color: #6b7280;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 500;
+  pointer-events: none;
+}
+
+/* App Header */
+.appHeader {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.75rem;
 }
 
-.timerProjectLabel {
-  font-size: 0.75rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.appHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
 
-.recordingIndicator {
+.appLogo {
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #2563eb; /* blue-600 */
+  letter-spacing: -0.03em;
+}
+
+.logoLight {
+  color: #374151; /* gray-700 */
+}
+
+.appNav {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.appNavTab {
+  background: transparent;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4b5563;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.appNavTab:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.appNavTabActive {
+  background: #eff6ff; /* blue-50 */
+  color: #1d4ed8; /* blue-700 */
+}
+
+/* Sync Indicator */
+.cloudSyncIndicator {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid transparent;
+}
+
+.cloudSaved {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+.cloudSaving {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}
+
+.checkmarkIcon {
+  font-weight: bold;
+}
+
+.spinner {
+  width: 9px;
+  height: 9px;
+  border: 2px solid #bfdbfe;
+  border-top: 2px solid #2563eb;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* App Workspace */
+.appWorkspace {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #f9fafb;
+  flex-grow: 1;
+  min-height: 280px;
+}
+
+.workspaceToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.toolbarTitleBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.workspaceTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.timeframeBadgeGrid {
+  display: flex;
+  background: #e5e7eb;
+  padding: 2px;
+  border-radius: 6px;
+}
+
+.timeframeBtn {
+  background: transparent;
+  border: none;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #6b7280;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.timeframeBtnActive {
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.toolbarNavigation {
   display: flex;
   align-items: center;
   gap: 0.35rem;
 }
 
-.redPulseDot {
-  width: 6px;
-  height: 6px;
-  background-color: #ef4444;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-  animation: redPulse 1.6s infinite;
-}
-
-@keyframes redPulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
-  }
-}
-
-.recordingText {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #ef4444;
-  letter-spacing: 0.05em;
-}
-
-.timeValueDisplay {
-  font-family: monospace;
-  font-size: 2.6rem;
-  font-weight: 700;
-  margin: 1.25rem 0;
-  color: var(--text-primary);
-  letter-spacing: 0.02em;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
-}
-
-.activeTaskNameDisplay {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.25rem;
-  height: 1.2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.stopButton {
-  background: #ef4444;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 0.6rem;
-  font-weight: 600;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: opacity 0.2s;
-  width: 100%;
-}
-
-.stopButton:hover {
-  opacity: 0.9;
-}
-
-.mutedText {
-  color: var(--text-secondary);
-  font-style: italic;
-}
-
-/* Right Side: Task Board */
-.taskBoardContainer {
-  flex: 1.2;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.taskBoardHeader {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.taskList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  max-height: 180px;
-  overflow-y: auto;
-}
-
-.taskRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  transition: all 0.2s;
-}
-
-.taskRow:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.activeTaskRow {
-  background: rgba(62, 166, 255, 0.07);
-  border-color: rgba(62, 166, 255, 0.25);
-}
-
-.taskNameGroup {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  min-width: 0;
-}
-
-.taskName {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.taskDuration {
-  font-size: 0.85rem;
-  font-family: monospace;
-  font-weight: 600;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  margin-left: 0.5rem;
-}
-
-.playPauseBtn {
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text-primary);
-  border: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
+.navArrow {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  font-size: 0.65rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
   cursor: pointer;
-  transition: all 0.2s;
-  flex-shrink: 0;
+  color: #4b5563;
 }
 
-.playPauseBtn:hover {
-  background: var(--accent);
-  color: #0f0f0f;
-  transform: scale(1.08);
+.navArrow:hover {
+  background: #f3f4f6;
 }
 
-.activePlayBtn {
-  background: #ef4444;
-  color: #ffffff;
-}
-
-.activePlayBtn:hover {
-  background: #dc2626;
-  color: #ffffff;
-}
-
-.addTaskForm {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: auto;
-}
-
-.addTaskInput {
-  flex: 1;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-  padding: 0.4rem 0.65rem;
-  color: var(--text-primary);
-  font-size: 0.8rem;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.addTaskInput:focus {
-  border-color: var(--accent);
-}
-
-.addTaskBtn {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  padding: 0.4rem 0.75rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background 0.2s;
-}
-
-.addTaskBtn:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* Invoicing */
-.invoiceToggleContainer {
-  width: 100%;
-}
-
-.invoiceBtn {
-  background: rgba(62, 166, 255, 0.1);
-  color: var(--accent);
-  border: 1px solid rgba(62, 166, 255, 0.2);
-  border-radius: 8px;
-  padding: 0.55rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  width: 100%;
-}
-
-.invoiceBtn:hover {
-  background: var(--accent);
-  color: #0f0f0f;
-}
-
-.invoiceSheet {
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 1.25rem;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.invoiceSheetHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.invoiceSheetHeader h4 {
-  font-size: 0.95rem;
-  color: var(--text-primary);
-}
-
-.rateControl {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.rateInput {
-  width: 50px;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
-  border-radius: 4px;
-  padding: 0.15rem 0.3rem;
-  font-size: 0.8rem;
-  outline: none;
-  text-align: center;
-}
-
-.invoiceTable {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.8rem;
-}
-
-.invoiceTable th,
-.invoiceTable td {
-  padding: 0.45rem 0;
-  color: var(--text-secondary);
-}
-
-.invoiceTable th {
-  color: var(--text-primary);
-  font-weight: 600;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.invoiceTotalRow td {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
-  padding-top: 0.6rem;
-}
-
-.invoiceFooter {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  text-align: center;
-  margin-top: 0.5rem;
-  border-top: 1px dotted rgba(255, 255, 255, 0.06);
-  padding-top: 0.4rem;
-}
-
-/* Session Logs */
-.logsSection {
-  margin-top: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 1rem;
-}
-
-.logsTitle {
-  font-size: 0.75rem;
+.navWeekLabel {
+  font-size: 0.6rem;
   font-weight: 700;
-  color: var(--text-secondary);
-  text-transform: uppercase;
+  color: #9ca3af;
   letter-spacing: 0.05em;
 }
 
-.logsContainer {
+/* Timesheet Matrix Table */
+.timesheetGridWrapper {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.timesheetTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.timesheetTable th,
+.timesheetTable td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 0.4rem 0.6rem;
+}
+
+.colProjectTask {
+  width: 32%;
+  font-weight: 700;
+  color: #374151;
+}
+
+.colDay {
+  width: 11%;
+  text-align: center;
+}
+
+.dayLabel {
+  display: block;
+  font-weight: 700;
+  color: #374151;
+}
+
+.dayDate {
+  display: block;
+  font-size: 0.6rem;
+  color: #9ca3af;
+}
+
+.colTotal {
+  width: 13%;
+  text-align: right;
+  font-weight: 700;
+  color: #374151;
+}
+
+/* Collapsible Project Row */
+.projectHeaderRow {
+  background: #f3f4f6;
+  font-weight: 700;
+  color: #1f2937;
+  cursor: pointer;
+}
+
+.projectHeaderCell {
+  font-size: 0.75rem;
+  padding-left: 0.5rem;
+  text-align: left;
+}
+
+.arrowToggle {
+  display: inline-block;
+  font-size: 0.6rem;
+  margin-right: 0.25rem;
+  transition: transform 0.2s;
+  color: #6b7280;
+}
+
+.arrowRight {
+  transform: rotate(-90deg);
+}
+
+.arrowDown {
+  transform: rotate(0deg);
+}
+
+.projectTotalVal {
+  text-align: right;
+  font-weight: 700;
+  color: #111827;
+  padding-right: 0.6rem;
+}
+
+/* Task Input Row */
+.taskInputRow {
+  background: #ffffff;
+}
+
+.taskInputRow:hover {
+  background: #f9fafb;
+}
+
+.taskTitleCell {
+  color: #4b5563;
+  font-weight: 500;
+  padding-left: 1.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.taskBullet {
+  color: #2563eb;
+  margin-right: 0.2rem;
+}
+
+.taskCellInputContainer {
+  text-align: center;
+  padding: 0.2rem !important;
+}
+
+.gridHourInput {
+  width: 100%;
+  max-width: 44px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 0.15rem 0.25rem;
+  font-family: monospace;
+  font-size: 0.75rem;
+  text-align: center;
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.gridHourInput:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.taskTotalCell {
+  text-align: right;
+  font-family: monospace;
+  font-weight: 700;
+  color: #111827;
+  padding-right: 0.6rem;
+}
+
+/* Totals Row */
+.gridTotalsRow {
+  background: #f9fafb;
+  font-weight: 700;
+  color: #111827;
+}
+
+.totalsTitleCell {
+  color: #374151;
+  font-weight: 750;
+  padding-left: 0.6rem;
+}
+
+.dayTotalCell {
+  text-align: center;
+  font-family: monospace;
+  color: #374151;
+}
+
+.grandTotalCell {
+  text-align: right;
+  font-family: monospace;
+  color: #2563eb;
+  padding-right: 0.6rem;
+}
+
+/* Add Task form in App Frame */
+.appAddTaskForm {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.appAddTaskInput {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+  color: #111827;
+  font-size: 0.75rem;
+  outline: none;
+}
+
+.appAddTaskInput:focus {
+  border-color: #2563eb;
+}
+
+.appAddTaskBtn {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.appAddTaskBtn:hover {
+  background: #1d4ed8;
+}
+
+/* Under Construction state */
+.appUnderConstruction {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  color: #6b7280;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  flex-grow: 1;
+  gap: 0.5rem;
 }
 
-.logRow {
+.appUnderConstruction h4 {
+  font-size: 0.9rem;
+  color: #111827;
+  font-weight: 700;
+}
+
+.appUnderConstruction p {
+  font-size: 0.75rem;
+  max-width: 260px;
+  line-height: 1.35;
+}
+
+.miniBtn {
+  background: rgba(0, 0, 0, 0.05);
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.miniBtn:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Value Props Styling */
+.cardFeatureList {
   display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  background: rgba(0, 0, 0, 0.15);
-  padding: 0.4rem 0.65rem;
-  border-radius: 6px;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: auto;
 }
 
-.logText strong {
+.featureItem {
+  font-size: 0.8rem;
+  color: #10b981;
+  font-weight: 500;
+}
+
+.pricingSection {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.priceTag {
+  font-size: 2.25rem;
+  font-weight: 700;
   color: var(--text-primary);
 }
 
-.logTime {
-  font-size: 0.75rem;
+.pricePeriod {
+  font-size: 0.95rem;
+  font-weight: 500;
   color: var(--text-secondary);
+}
+
+.priceBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* Business Inquiries Forms */
@@ -533,8 +645,8 @@
 
 .textInput {
   width: 100%;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(30, 30, 30, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   padding: 0.45rem 0.75rem;
   color: var(--text-primary);
@@ -549,8 +661,8 @@
 
 .textareaInput {
   width: 100%;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(30, 30, 30, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   padding: 0.45rem 0.75rem;
   color: var(--text-primary);
@@ -568,7 +680,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(30, 30, 30, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 6px;
   padding: 0.35rem 0.65rem;
@@ -649,62 +761,6 @@
   line-height: 1.35;
 }
 
-.miniBtn {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.miniBtn:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-/* Feature & Pricing Cards (Value Props) */
-.cardFeatureList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  margin-top: auto;
-}
-
-.featureItem {
-  font-size: 0.8rem;
-  color: #10b981;
-  font-weight: 500;
-}
-
-.pricingSection {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.priceTag {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.pricePeriod {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.priceBadge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
 /* Responsive Layout */
 @media (max-width: 960px) {
   .bentoGrid {
@@ -712,18 +768,6 @@
   }
   .flagshipCard {
     grid-column: span 2;
-  }
-}
-
-@media (max-width: 768px) {
-  .demoLayoutGrid {
-    flex-direction: column;
-  }
-  .timerControlPanel {
-    flex: none;
-  }
-  .taskBoardContainer {
-    flex: none;
   }
 }
 

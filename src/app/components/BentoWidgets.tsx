@@ -1,308 +1,288 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import styles from '../page.module.css';
 
 interface Task {
-  id: number;
+  id: string;
   name: string;
-  timeLogged: number; // in seconds
 }
 
-interface LogEntry {
-  id: number;
-  taskName: string;
-  duration: number; // in seconds
-  timestamp: string;
-}
-
-// 1. Flagship: timematrix Interactive Demo Widget
+// 1. High-Fidelity timematrix App Demo Widget
 export function TimeMatrixDemoWidget() {
-  const [tasks, setTasks] = useState<Task[]>([
-    { id: 1, name: 'UI/UX Design Mockups', timeLogged: 9000 },     // 2.5h
-    { id: 2, name: 'Frontend Code Implementation', timeLogged: 15300 }, // 4.25h
-    { id: 3, name: 'Client Revisions & Consult', timeLogged: 3600 }   // 1.0h
-  ]);
-
-  const [activeTaskId, setActiveTaskId] = useState<number | null>(null);
-  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [activeAppTab, setActiveAppTab] = useState('Timesheets');
+  const [timeframe, setTimeframe] = useState('week'); // 'day', 'week', 'month'
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [newTaskName, setNewTaskName] = useState('');
-  const [logs, setLogs] = useState<LogEntry[]>([
-    { id: 101, taskName: 'Frontend Code Implementation', duration: 3600, timestamp: '10:45 AM' },
-    { id: 102, taskName: 'UI/UX Design Mockups', duration: 5400, timestamp: 'Yesterday' }
+
+  const isFirstRender = useRef(true);
+
+  // 3 Default Tasks
+  const [tasks, setTasks] = useState<Task[]>([
+    { id: 't1', name: 'Schematic Design' },
+    { id: 't2', name: 'Site Visit & Inspection' },
+    { id: 't3', name: 'Drafting & Mockups' }
   ]);
-  const [showInvoice, setShowInvoice] = useState(false);
-  const [hourlyRate, setHourlyRate] = useState(45); // Default $45/hr for small business invoice mock
 
-  // Ticking timer effect
+  // Initial logged hours (taskIndex_dayIndex)
+  const [entries, setEntries] = useState<Record<string, string>>({
+    't1_0': '3.0', 't1_1': '4.0', 't1_2': '0',   't1_3': '0',   't1_4': '0',
+    't2_0': '0',   't2_1': '0',   't2_2': '8.0', 't2_3': '0',   't2_4': '0',
+    't3_0': '0',   't3_1': '0',   't3_2': '0',   't3_3': '4.5', 't3_4': '8.0',
+  });
+
+  // Watch entries for changes to trigger the "Saving to Cloud..." status check
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-    if (activeTaskId !== null) {
-      interval = setInterval(() => {
-        setTimerSeconds(prev => prev + 1);
-      }, 1000);
-    } else {
-      setTimerSeconds(0);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [activeTaskId]);
+    setIsSaving(true);
+    const delay = setTimeout(() => {
+      setIsSaving(false);
+    }, 850);
+    return () => clearTimeout(delay);
+  }, [entries]);
 
-  const formatSeconds = (totalSeconds: number) => {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    return [
-      hours.toString().padStart(2, '0'),
-      minutes.toString().padStart(2, '0'),
-      seconds.toString().padStart(2, '0')
-    ].join(':');
-  };
-
-  const formatLoggedTime = (totalSeconds: number) => {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    if (hours > 0) {
-      return `${hours}h ${minutes}m`;
-    }
-    return `${minutes}m`;
-  };
-
-  const startTask = (id: number) => {
-    if (activeTaskId !== null) {
-      stopActiveTask();
-    }
-    setActiveTaskId(id);
-    setTimerSeconds(0);
-  };
-
-  const stopActiveTask = () => {
-    if (activeTaskId === null) return;
-
-    const currentActiveSeconds = timerSeconds;
-    const taskToUpdate = tasks.find(t => t.id === activeTaskId);
-
-    setTasks(prevTasks =>
-      prevTasks.map(t =>
-        t.id === activeTaskId
-          ? { ...t, timeLogged: t.timeLogged + currentActiveSeconds }
-          : t
-      )
-    );
-
-    if (taskToUpdate) {
-      const logEntry: LogEntry = {
-        id: Date.now(),
-        taskName: taskToUpdate.name,
-        duration: currentActiveSeconds,
-        timestamp: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
-      };
-      setLogs(prevLogs => [logEntry, ...prevLogs]);
-    }
-
-    setActiveTaskId(null);
-    setTimerSeconds(0);
-  };
-
-  const handleToggleTimer = (id: number) => {
-    if (activeTaskId === id) {
-      stopActiveTask();
-    } else {
-      startTask(id);
-    }
+  const handleCellChange = (taskId: string, dayIndex: number, val: string) => {
+    // Keep it as a string to allow editing (e.g. typing decimals)
+    setEntries(prev => ({
+      ...prev,
+      [`${taskId}_${dayIndex}`]: val
+    }));
   };
 
   const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTaskName.trim()) return;
+    const newId = `t_${Date.now()}`;
     const newTask: Task = {
-      id: Date.now(),
-      name: newTaskName.trim(),
-      timeLogged: 0
+      id: newId,
+      name: newTaskName.trim()
     };
     setTasks([...tasks, newTask]);
+    
+    // Initialize day hours for the new task
+    setEntries(prev => {
+      const next = { ...prev };
+      for (let i = 0; i < 5; i++) {
+        next[`${newId}_${i}`] = '0';
+      }
+      return next;
+    });
+
     setNewTaskName('');
   };
 
-  const activeTaskObj = tasks.find(t => t.id === activeTaskId);
+  // Helper calculations
+  const weekdays = [
+    { label: 'Mon', dateStr: '7/12' },
+    { label: 'Tue', dateStr: '7/13' },
+    { label: 'Wed', dateStr: '7/14' },
+    { label: 'Thu', dateStr: '7/15' },
+    { label: 'Fri', dateStr: '7/16' }
+  ];
 
-  // Compute invoice totals
-  const totalHours = tasks.reduce((sum, t) => sum + (t.timeLogged / 3600), 0);
-  const totalBillable = totalHours * hourlyRate;
+  // Recalculate totals
+  const taskTotals = useMemo(() => {
+    const totals: Record<string, number> = {};
+    tasks.forEach(t => {
+      let sum = 0;
+      for (let i = 0; i < 5; i++) {
+        sum += parseFloat(entries[`${t.id}_${i}`]) || 0;
+      }
+      totals[t.id] = sum;
+    });
+    return totals;
+  }, [tasks, entries]);
+
+  const dayTotals = useMemo(() => {
+    const totals: number[] = [0, 0, 0, 0, 0];
+    for (let i = 0; i < 5; i++) {
+      let sum = 0;
+      tasks.forEach(t => {
+        sum += parseFloat(entries[`${t.id}_${i}`]) || 0;
+      });
+      totals[i] = sum;
+    }
+    return totals;
+  }, [tasks, entries]);
+
+  const grandTotal = useMemo(() => {
+    return dayTotals.reduce((sum, val) => sum + val, 0);
+  }, [dayTotals]);
 
   return (
     <div className={`${styles.bentoCard} ${styles.flagshipCard}`}>
-      <div className={styles.flagshipHeader}>
-        <div>
-          <span className={styles.badge}>INTERACTIVE APP DEMO</span>
-          <h2 className={styles.cardTitle}>timematrix App Sandbox</h2>
-          <p className={styles.cardDesc}>
-            Try it out! Select a task to start tracking your time, or add a custom task. Click "Generate Invoice Summary" to see how it automatically prepares billing sheets.
-          </p>
+      {/* Desktop App Frame Container */}
+      <div className={styles.appContainerFrame}>
+        {/* macOS Window Controls Top Bar */}
+        <div className={styles.appTopBar}>
+          <div className={styles.windowControls}>
+            <span className={styles.dotRed}></span>
+            <span className={styles.dotYellow}></span>
+            <span className={styles.dotGreen}></span>
+          </div>
+          <span className={styles.windowTitle}>timematrix App Sandbox</span>
         </div>
-      </div>
 
-      <div className={styles.demoLayoutGrid}>
-        {/* Left Side: Stopwatch / Active Timer */}
-        <div className={styles.timerControlPanel}>
-          <div className={styles.timerDisplayCard}>
-            <div className={styles.timerHeaderRow}>
-              <span className={styles.timerProjectLabel}>Active Project: <strong>Acme Corp Web Redesign</strong></span>
-              {activeTaskId !== null && (
-                <div className={styles.recordingIndicator}>
-                  <span className={styles.redPulseDot}></span>
-                  <span className={styles.recordingText}>TRACKING</span>
-                </div>
-              )}
+        {/* App Header */}
+        <header className={styles.appHeader}>
+          <div className={styles.appHeaderLeft}>
+            <div className={styles.appLogo}>
+              TIME<span className={styles.logoLight}>MATRIX</span>
             </div>
-
-            <div className={styles.timeValueDisplay}>
-              {activeTaskId !== null ? formatSeconds(timerSeconds) : '00:00:00'}
-            </div>
-
-            <div className={styles.activeTaskNameDisplay}>
-              {activeTaskId !== null ? (
-                <>Tracking: <strong>{activeTaskObj?.name}</strong></>
-              ) : (
-                <span className={styles.mutedText}>Select a task below to start tracking</span>
-              )}
-            </div>
-
-            {activeTaskId !== null && (
-              <button onClick={stopActiveTask} className={styles.stopButton}>
-                Stop Tracking
-              </button>
+            <nav className={styles.appNav}>
+              {['Timesheets', 'Projects', 'Reports', 'Invoices'].map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveAppTab(tab)}
+                  className={`${styles.appNavTab} ${activeAppTab === tab ? styles.appNavTabActive : ''}`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </nav>
+          </div>
+          <div className={styles.appHeaderRight}>
+            {isSaving ? (
+              <div className={`${styles.cloudSyncIndicator} ${styles.cloudSaving}`}>
+                <span className={styles.spinner}></span>
+                Saving to Cloud...
+              </div>
+            ) : (
+              <div className={`${styles.cloudSyncIndicator} ${styles.cloudSaved}`}>
+                <span className={styles.checkmarkIcon}>✓</span>
+                Saved to Cloud
+              </div>
             )}
           </div>
+        </header>
 
-          {/* Quick Invoice Section */}
-          <div className={styles.invoiceToggleContainer}>
-            <button 
-              onClick={() => setShowInvoice(!showInvoice)} 
-              className={styles.invoiceBtn}
-            >
-              {showInvoice ? 'Hide Invoice Preview' : 'Generate Invoice Summary'}
-            </button>
-          </div>
-        </div>
-
-        {/* Right Side: Task Board */}
-        <div className={styles.taskBoardContainer}>
-          <div className={styles.taskBoardHeader}>
-            <span>Project Tasks</span>
-            <span>Hours Logged</span>
-          </div>
-
-          <div className={styles.taskList}>
-            {tasks.map(t => {
-              const isThisActive = activeTaskId === t.id;
-              return (
-                <div 
-                  key={t.id} 
-                  className={`${styles.taskRow} ${isThisActive ? styles.activeTaskRow : ''}`}
-                >
-                  <div className={styles.taskNameGroup}>
-                    <button 
-                      onClick={() => handleToggleTimer(t.id)} 
-                      className={`${styles.playPauseBtn} ${isThisActive ? styles.activePlayBtn : ''}`}
-                      title={isThisActive ? 'Stop' : 'Start'}
-                    >
-                      {isThisActive ? '■' : '▶'}
-                    </button>
-                    <span className={styles.taskName}>{t.name}</span>
+        {/* Main App Workspace */}
+        <div className={styles.appWorkspace}>
+          {activeAppTab === 'Timesheets' ? (
+            <>
+              {/* Workspace Toolbar */}
+              <div className={styles.workspaceToolbar}>
+                <div className={styles.toolbarTitleBlock}>
+                  <h3 className={styles.workspaceTitle}>Timesheet for Week of July 12 – July 16, 2026</h3>
+                  <div className={styles.timeframeBadgeGrid}>
+                    {['day', 'week', 'month'].map(t => (
+                      <button
+                        key={t}
+                        onClick={() => setTimeframe(t)}
+                        className={`${styles.timeframeBtn} ${timeframe === t ? styles.timeframeBtnActive : ''}`}
+                      >
+                        {t.charAt(0).toUpperCase() + t.slice(1)}
+                      </button>
+                    ))}
                   </div>
-                  <span className={styles.taskDuration}>
-                    {isThisActive 
-                      ? formatLoggedTime(t.timeLogged + timerSeconds) 
-                      : formatLoggedTime(t.timeLogged)
-                    }
-                  </span>
                 </div>
-              );
-            })}
-          </div>
 
-          {/* Add Task Form */}
-          <form onSubmit={handleAddTask} className={styles.addTaskForm}>
-            <input
-              type="text"
-              placeholder="Create a new task..."
-              value={newTaskName}
-              onChange={(e) => setNewTaskName(e.target.value)}
-              className={styles.addTaskInput}
-            />
-            <button type="submit" className={styles.addTaskBtn}>+ Add</button>
-          </form>
+                <div className={styles.toolbarNavigation}>
+                  <button className={styles.navArrow} title="Previous Week">&lt;</button>
+                  <span className={styles.navWeekLabel}>NAVIGATE</span>
+                  <button className={styles.navArrow} title="Next Week">&gt;</button>
+                </div>
+              </div>
+
+              {/* Timesheet Grid (Table) */}
+              <div className={styles.timesheetGridWrapper}>
+                <table className={styles.timesheetTable}>
+                  <thead>
+                    <tr>
+                      <th className={styles.colProjectTask}>Project / Task</th>
+                      {weekdays.map((day, idx) => (
+                        <th key={idx} className={styles.colDay}>
+                          <span className={styles.dayLabel}>{day.label}</span>
+                          <span className={styles.dayDate}>{day.dateStr}</span>
+                        </th>
+                      ))}
+                      <th className={styles.colTotal}>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* Collapsible Project Category Header Row */}
+                    <tr className={styles.projectHeaderRow} onClick={() => setIsCollapsed(!isCollapsed)}>
+                      <td colSpan={7} className={styles.projectHeaderCell}>
+                        <span className={`${styles.arrowToggle} ${isCollapsed ? styles.arrowRight : styles.arrowDown}`}>▼</span>
+                        📂 Headquarters Redesign
+                      </td>
+                      <td className={styles.projectTotalVal}>
+                        {grandTotal.toFixed(1)} hrs
+                      </td>
+                    </tr>
+
+                    {/* Task Rows (Hidden if collapsed) */}
+                    {!isCollapsed && tasks.map(t => (
+                      <tr key={t.id} className={styles.taskInputRow}>
+                        <td className={styles.taskTitleCell}>
+                          <span className={styles.taskBullet}>•</span> {t.name}
+                        </td>
+                        {weekdays.map((_, dayIdx) => {
+                          const valKey = `${t.id}_${dayIdx}`;
+                          const val = entries[valKey] || '';
+                          return (
+                            <td key={dayIdx} className={styles.taskCellInputContainer}>
+                              <input
+                                type="text"
+                                value={val}
+                                onChange={(e) => handleCellChange(t.id, dayIdx, e.target.value)}
+                                className={styles.gridHourInput}
+                                placeholder="0"
+                              />
+                            </td>
+                          );
+                        })}
+                        <td className={styles.taskTotalCell}>
+                          {taskTotals[t.id].toFixed(1)}
+                        </td>
+                      </tr>
+                    ))}
+
+                    {/* Totals Row */}
+                    <tr className={styles.gridTotalsRow}>
+                      <td className={styles.totalsTitleCell}>Total Hours</td>
+                      {dayTotals.map((tot, idx) => (
+                        <td key={idx} className={styles.dayTotalCell}>
+                          {tot > 0 ? tot.toFixed(1) : '-'}
+                        </td>
+                      ))}
+                      <td className={styles.grandTotalCell}>
+                        {grandTotal.toFixed(1)}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Add Task Input Form */}
+              <form onSubmit={handleAddTask} className={styles.appAddTaskForm}>
+                <input
+                  type="text"
+                  placeholder="Create a new task under Headquarters Redesign..."
+                  value={newTaskName}
+                  onChange={(e) => setNewTaskName(e.target.value)}
+                  className={styles.appAddTaskInput}
+                />
+                <button type="submit" className={styles.appAddTaskBtn}>
+                  + Add Task
+                </button>
+              </form>
+            </>
+          ) : (
+            <div className={styles.appUnderConstruction}>
+              <h4>{activeAppTab} Portal</h4>
+              <p>This section is mock-locked in the sandbox. Try updating the grid in the <strong>Timesheets</strong> tab to see live hours update!</p>
+              <button onClick={() => setActiveAppTab('Timesheets')} className={styles.miniBtn}>
+                Back to Timesheets
+              </button>
+            </div>
+          )}
         </div>
       </div>
-
-      {/* Invoice Modal Overlay/Details (Shown when toggled) */}
-      {showInvoice && (
-        <div className={styles.invoiceSheet}>
-          <div className={styles.invoiceSheetHeader}>
-            <h4>Mock Invoice Summary</h4>
-            <div className={styles.rateControl}>
-              <label>Rate ($/hr):</label>
-              <input 
-                type="number" 
-                value={hourlyRate} 
-                onChange={(e) => setHourlyRate(Math.max(0, parseInt(e.target.value, 10) || 0))}
-                className={styles.rateInput}
-              />
-            </div>
-          </div>
-          
-          <div className={styles.invoiceBody}>
-            <table className={styles.invoiceTable}>
-              <thead>
-                <tr>
-                  <th>Task Description</th>
-                  <th style={{ textAlign: 'right' }}>Hours</th>
-                  <th style={{ textAlign: 'right' }}>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tasks.map(t => {
-                  const hours = t.timeLogged / 3600;
-                  return (
-                    <tr key={t.id}>
-                      <td>{t.name}</td>
-                      <td style={{ textAlign: 'right' }}>{hours.toFixed(2)} hrs</td>
-                      <td style={{ textAlign: 'right' }}>${(hours * hourlyRate).toFixed(2)}</td>
-                    </tr>
-                  );
-                })}
-                <tr className={styles.invoiceTotalRow}>
-                  <td><strong>Total Billable Amount</strong></td>
-                  <td style={{ textAlign: 'right' }}><strong>{totalHours.toFixed(2)} hrs</strong></td>
-                  <td style={{ textAlign: 'right' }}><strong>${totalBillable.toFixed(2)}</strong></td>
-                </tr>
-              </tbody>
-            </table>
-            <div className={styles.invoiceFooter}>
-              <span>Ready for Export to Quickbooks, Freshbooks, or CSV.</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Session Logs Panel */}
-      {logs.length > 0 && (
-        <div className={styles.logsSection}>
-          <span className={styles.logsTitle}>Recent Session Log</span>
-          <div className={styles.logsContainer}>
-            {logs.slice(0, 3).map(log => (
-              <div key={log.id} className={styles.logRow}>
-                <span className={styles.logText}>
-                  Logged <strong>{formatLoggedTime(log.duration)}</strong> on <em>{log.taskName}</em>
-                </span>
-                <span className={styles.logTime}>{log.timestamp}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
@@ -341,18 +321,18 @@ export function BusinessInquiryWidget() {
   return (
     <div className={styles.bentoCard}>
       <div>
-        <h3 className={styles.cardTitle}>Questions / Inquiry</h3>
-        <p className={styles.cardDesc}>Interested in timematrix for your team? Send a message and let's talk about your requirements.</p>
+        <h3 className={styles.cardTitle}>Product Inquiries</h3>
+        <p className={styles.cardDesc}>Interested in timematrix for your team? Send a message and let's discuss how we can support your business.</p>
       </div>
 
       {status === 'success' ? (
         <div className={styles.successWrapper}>
           <div className={styles.successCheck}>✓</div>
           <div className={styles.successMessage}>
-            <h4>Inquiry Received!</h4>
-            <p>Thank you for reaching out. We will get back to you within one business day to discuss how timematrix can fit your team.</p>
+            <h4>Inquiry Submitted!</h4>
+            <p>Thank you for reaching out. We will get back to you within one business day to discuss custom trials, importing logs, and setups.</p>
           </div>
-          <button onClick={resetForm} className={styles.miniBtn}>Send another message</button>
+          <button onClick={resetForm} className={styles.miniBtn}>Submit another</button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} className={styles.feedbackForm}>
@@ -397,7 +377,7 @@ export function BusinessInquiryWidget() {
               </select>
             </div>
             <textarea
-              placeholder="How can we help your business track time? (required)"
+              placeholder="Tell us about your time tracking requirements (required)"
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               className={styles.textareaInput}
