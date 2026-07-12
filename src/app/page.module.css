@@ -68,10 +68,6 @@
   box-shadow: 0 12px 30px rgba(62, 166, 255, 0.15);
 }
 
-.spanTwoColumns {
-  grid-column: span 2;
-}
-
 .cardTitle {
   font-size: 1.35rem;
   font-weight: 600;
@@ -85,7 +81,7 @@
   line-height: 1.4;
 }
 
-/* Badge & CTA */
+/* Badge */
 .badge {
   display: inline-block;
   font-size: 0.7rem;
@@ -99,284 +95,446 @@
   letter-spacing: 0.05em;
 }
 
-.primaryCTA {
-  display: inline-flex;
-  align-items: center;
-  background: var(--accent);
-  color: #0f0f0f;
-  font-weight: 600;
-  font-size: 0.85rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  white-space: nowrap;
-}
-
-.primaryCTA:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
 .flagshipHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Matrix Sandbox */
-.matrixContainer {
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 12px;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+/* timematrix Demo Layout */
+.demoLayoutGrid {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  align-items: stretch;
+}
+
+/* Left Side: Timer Control */
+.timerControlPanel {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.timerDisplayCard {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   flex-grow: 1;
 }
 
-.matrixToolbar {
+.timerHeaderRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0.75rem;
   color: var(--text-secondary);
-}
-
-.toolbarButtons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.miniBtn {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.miniBtn:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.matrixGrid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 5px;
-}
-
-.matrixCell {
-  aspect-ratio: 1;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.matrixCell:hover {
-  transform: scale(1.2);
-  z-index: 2;
-}
-
-/* Global Clock */
-.clockGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: auto;
-}
-
-.clockRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
-.clockRow:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
+.timerProjectLabel {
+  font-size: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.clockLabel {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.clockValContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.clockTime {
-  font-family: monospace;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.clockDate {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-}
-
-.tzSelect {
-  background: rgba(0, 0, 0, 0.4);
-  color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  padding: 0.25rem;
-  font-size: 0.8rem;
-  outline: none;
-  cursor: pointer;
-}
-
-/* Infrastructure / System Status */
-.statusHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.operationalStatus {
+.recordingIndicator {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  padding: 0.2rem 0.5rem;
-  border-radius: 9999px;
-}
-
-.pulseDot {
-  width: 6px;
-  height: 6px;
-  background-color: #10b981;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  animation: pulse 1.6s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 5px rgba(16, 185, 129, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-  }
-}
-
-.statusText {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #10b981;
-  letter-spacing: 0.05em;
-}
-
-.metricsList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-}
-
-.metricItem {
-  display: flex;
-  flex-direction: column;
   gap: 0.35rem;
 }
 
-.metricLabelRow {
-  display: flex;
-  justify-content: space-between;
+.redPulseDot {
+  width: 6px;
+  height: 6px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  animation: redPulse 1.6s infinite;
+}
+
+@keyframes redPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 5px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.recordingText {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ef4444;
+  letter-spacing: 0.05em;
+}
+
+.timeValueDisplay {
+  font-family: monospace;
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 1.25rem 0;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+.activeTaskNameDisplay {
   font-size: 0.8rem;
   color: var(--text-secondary);
-}
-
-.metricVal {
-  font-family: monospace;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.progressBarBg {
-  height: 5px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
+  margin-bottom: 1.25rem;
+  height: 1.2rem;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.progressBarFill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 1s ease-in-out;
+.stopButton {
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  width: 100%;
 }
 
-/* Dev Utilities */
-.devToolsBody {
+.stopButton:hover {
+  opacity: 0.9;
+}
+
+.mutedText {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Right Side: Task Board */
+.taskBoardContainer {
+  flex: 1.2;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
-.epochBox {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  padding: 0.65rem 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.epochLabel {
-  font-size: 0.7rem;
+.taskBoardHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--text-secondary);
-  margin-bottom: 0.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.epochValueRow {
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.taskRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.code {
-  font-family: monospace;
-  font-size: 1.05rem;
-  color: var(--accent);
-  font-weight: bold;
-}
-
-.copyBtn {
-  background: rgba(62, 166, 255, 0.1);
-  color: var(--accent);
-  border: 1px solid rgba(62, 166, 255, 0.2);
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
   transition: all 0.2s;
 }
 
-.copyBtn:hover {
+.taskRow:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.activeTaskRow {
+  background: rgba(62, 166, 255, 0.07);
+  border-color: rgba(62, 166, 255, 0.25);
+}
+
+.taskNameGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.taskName {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.taskDuration {
+  font-size: 0.85rem;
+  font-family: monospace;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  margin-left: 0.5rem;
+}
+
+.playPauseBtn {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  border: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.playPauseBtn:hover {
+  background: var(--accent);
+  color: #0f0f0f;
+  transform: scale(1.08);
+}
+
+.activePlayBtn {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.activePlayBtn:hover {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.addTaskForm {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.addTaskInput {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.4rem 0.65rem;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.addTaskInput:focus {
+  border-color: var(--accent);
+}
+
+.addTaskBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.addTaskBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Invoicing */
+.invoiceToggleContainer {
+  width: 100%;
+}
+
+.invoiceBtn {
+  background: rgba(62, 166, 255, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(62, 166, 255, 0.2);
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.invoiceBtn:hover {
   background: var(--accent);
   color: #0f0f0f;
 }
 
+.invoiceSheet {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.25rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.invoiceSheetHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.invoiceSheetHeader h4 {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.rateControl {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.rateInput {
+  width: 50px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border-radius: 4px;
+  padding: 0.15rem 0.3rem;
+  font-size: 0.8rem;
+  outline: none;
+  text-align: center;
+}
+
+.invoiceTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.invoiceTable th,
+.invoiceTable td {
+  padding: 0.45rem 0;
+  color: var(--text-secondary);
+}
+
+.invoiceTable th {
+  color: var(--text-primary);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.invoiceTotalRow td {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  padding-top: 0.6rem;
+}
+
+.invoiceFooter {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 0.5rem;
+  border-top: 1px dotted rgba(255, 255, 255, 0.06);
+  padding-top: 0.4rem;
+}
+
+/* Session Logs */
+.logsSection {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1rem;
+}
+
+.logsTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.logsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.logRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: rgba(0, 0, 0, 0.15);
+  padding: 0.4rem 0.65rem;
+  border-radius: 6px;
+}
+
+.logText strong {
+  color: var(--text-primary);
+}
+
+.logTime {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Business Inquiries Forms */
+.feedbackForm {
+  width: 100%;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
 .textInput {
   width: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 6px;
   padding: 0.45rem 0.75rem;
   color: var(--text-primary);
@@ -389,26 +547,47 @@
   border-color: var(--accent);
 }
 
-.conversionOutput {
-  background: rgba(0, 0, 0, 0.35);
-  padding: 0.45rem 0.75rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Feedback & Suggestions */
-.feedbackForm {
+.textareaInput {
   width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  outline: none;
+  resize: none;
+  transition: border-color 0.2s;
 }
 
-.formRow {
+.textareaInput:focus {
+  border-color: var(--accent);
+}
+
+.selectGroup {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  padding: 0.35rem 0.65rem;
+}
+
+.selectLabel {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.tzSelect {
+  background: rgba(0, 0, 0, 0.45);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 0.15rem 0.3rem;
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
 }
 
 .submitBtn {
@@ -416,11 +595,12 @@
   color: #0f0f0f;
   border: none;
   border-radius: 6px;
-  padding: 0.55rem;
+  padding: 0.6rem;
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
   transition: opacity 0.2s;
+  margin-top: 0.25rem;
 }
 
 .submitBtn:hover {
@@ -428,7 +608,7 @@
 }
 
 .submitBtn:disabled {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
   cursor: not-allowed;
 }
@@ -447,7 +627,7 @@
 .successCheck {
   font-size: 1.5rem;
   color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(16, 185, 129, 0.15);
   width: 40px;
   height: 40px;
   display: flex;
@@ -466,6 +646,63 @@
 .successMessage p {
   font-size: 0.8rem;
   color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.miniBtn {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.miniBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Feature & Pricing Cards (Value Props) */
+.cardFeatureList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: auto;
+}
+
+.featureItem {
+  font-size: 0.8rem;
+  color: #10b981;
+  font-weight: 500;
+}
+
+.pricingSection {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.priceTag {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pricePeriod {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.priceBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* Responsive Layout */
@@ -476,8 +713,17 @@
   .flagshipCard {
     grid-column: span 2;
   }
-  .spanTwoColumns {
-    grid-column: span 2;
+}
+
+@media (max-width: 768px) {
+  .demoLayoutGrid {
+    flex-direction: column;
+  }
+  .timerControlPanel {
+    flex: none;
+  }
+  .taskBoardContainer {
+    flex: none;
   }
 }
 
@@ -489,15 +735,9 @@
     grid-column: span 1;
     grid-row: span 1;
   }
-  .spanTwoColumns {
-    grid-column: span 1;
-  }
   .flagshipHeader {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
-  }
-  .primaryCTA {
-    align-self: flex-start;
+    gap: 0.75rem;
   }
 }
