@@ -117,16 +117,6 @@ export function TimeMatrixDemoWidget() {
     <div className={`${styles.bentoCard} ${styles.flagshipCard}`}>
       {/* Desktop App Frame Container */}
       <div className={styles.appContainerFrame}>
-        {/* macOS Window Controls Top Bar */}
-        <div className={styles.appTopBar}>
-          <div className={styles.windowControls}>
-            <span className={styles.dotRed}></span>
-            <span className={styles.dotYellow}></span>
-            <span className={styles.dotGreen}></span>
-          </div>
-          <span className={styles.windowTitle}>timematrix App Sandbox</span>
-        </div>
-
         {/* App Header */}
         <header className={styles.appHeader}>
           <div className={styles.appHeaderLeft}>
@@ -319,7 +309,7 @@ export function BusinessInquiryWidget() {
   };
 
   return (
-    <div className={styles.bentoCard}>
+    <div className={`${styles.bentoCard} ${styles.inquiriesCard}`}>
       <div>
         <h3 className={styles.cardTitle}>Product Inquiries</h3>
         <p className={styles.cardDesc}>Interested in timematrix for your team? Send a message and let's discuss how we can support your business.</p>
