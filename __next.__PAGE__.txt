@@ -1,7 +1,11 @@
 1:"$Sreact.fragment"
-2:I[22016,["/_next/static/chunks/3_x73rpcyat3r.js","/_next/static/chunks/14mrh2-p_w84d.js"],""]
-3:I[97367,["/_next/static/chunks/3_x73rpcyat3r.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-:HL["/_next/static/chunks/2qi9pj48qwpqw.css","style"]
-0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-module___8aEwW__container","children":[["$","header",null,{"className":"page-module___8aEwW__header","children":[["$","h1",null,{"className":"page-module___8aEwW__title","children":"Welcome to dgtools"}],["$","p",null,{"className":"page-module___8aEwW__subtitle","children":"Modular collection for the things that I build."}]]}],["$","div",null,{"className":"page-module___8aEwW__grid","children":[["$","$L2",null,{"href":"/stream","className":"card","children":[["$","h2",null,{"className":"card-title","children":"Stream →"}],["$","p",null,{"className":"card-desc","children":"Access streaming embeds, OBS browser sources, and Twitch/YouTube links."}]]}],["$","$L2",null,{"href":"/toolbox","className":"card","children":[["$","h2",null,{"className":"card-title","children":"Toolbox →"}],["$","p",null,{"className":"card-desc","children":"Discover various web-based tools and products like timematrix."}]]}]]}]]}],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/2qi9pj48qwpqw.css","precedence":"next"}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"nP3HfZZd09ZuiryzaPy_j"}
-5:null
+2:I[77400,["/_next/static/chunks/3_x73rpcyat3r.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/2owf2bvn00hhn.js"],"TimeMatrixPreview"]
+3:I[77400,["/_next/static/chunks/3_x73rpcyat3r.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/2owf2bvn00hhn.js"],"TimezoneWidget"]
+4:I[77400,["/_next/static/chunks/3_x73rpcyat3r.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/2owf2bvn00hhn.js"],"SystemStatus"]
+5:I[77400,["/_next/static/chunks/3_x73rpcyat3r.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/2owf2bvn00hhn.js"],"QuickTools"]
+6:I[77400,["/_next/static/chunks/3_x73rpcyat3r.js","/_next/static/chunks/14mrh2-p_w84d.js","/_next/static/chunks/2owf2bvn00hhn.js"],"FeedbackCard"]
+7:I[97367,["/_next/static/chunks/3_x73rpcyat3r.js","/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+:HL["/_next/static/chunks/38spafho81xgt.css","style"]
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"page-module___8aEwW__container","children":[["$","header",null,{"className":"page-module___8aEwW__header","children":[["$","h1",null,{"className":"page-module___8aEwW__title","children":"Welcome to dg.tools"}],["$","p",null,{"className":"page-module___8aEwW__subtitle","children":"Modular collection of custom tools and developer products."}]]}],["$","div",null,{"className":"page-module___8aEwW__bentoGrid","children":[["$","$L2",null,{}],["$","$L3",null,{}],["$","$L4",null,{}],["$","$L5",null,{}],["$","$L6",null,{}]]}]]}],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/38spafho81xgt.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/2owf2bvn00hhn.js","async":true}]],["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Ro6BB1Py234QWNR-1R7fX"}
+9:null
