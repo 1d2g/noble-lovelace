@@ -105,13 +105,13 @@
   padding: 0 0.5rem;
 }
 
-/* High Fidelity Desktop App Mockup Frame */
+/* High Fidelity Desktop App Mockup Frame (Dark Mode Default) */
 .appContainerFrame {
-  background: #f9fafb; /* Light Gray */
+  background: #18181b; /* zinc-900 */
   border: none;
   border-radius: 0;
   overflow: hidden;
-  color: #111827; /* Dark Gray text */
+  color: #f4f4f5; /* zinc-100 */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   display: flex;
   flex-direction: column;
@@ -125,8 +125,8 @@
 
 /* App Header */
 .appHeader {
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
+  background: #0f0f11; /* dark charcoal */
+  border-bottom: 1px solid #27272a; /* zinc-800 */
   padding: 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
@@ -142,12 +142,12 @@
 .appLogo {
   font-size: 0.9rem;
   font-weight: 900;
-  color: #2563eb; /* blue-600 */
+  color: #3b82f6; /* blue-500 */
   letter-spacing: -0.03em;
 }
 
 .logoLight {
-  color: #374151; /* gray-700 */
+  color: #e4e4e7; /* zinc-200 */
 }
 
 .appNav {
@@ -161,20 +161,20 @@
   padding: 0.3rem 0.6rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #4b5563;
+  color: #a1a1aa; /* zinc-400 */
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .appNavTab:hover {
-  background: #f3f4f6;
-  color: #111827;
+  background: #27272a;
+  color: #ffffff;
 }
 
 .appNavTabActive {
-  background: #eff6ff; /* blue-50 */
-  color: #1d4ed8; /* blue-700 */
+  background: #27272a;
+  color: #ffffff;
 }
 
 /* Sync Indicator */
@@ -190,15 +190,15 @@
 }
 
 .cloudSaved {
-  background: #ecfdf5;
-  color: #047857;
-  border-color: #a7f3d0;
+  background: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.2);
 }
 
 .cloudSaving {
-  background: #eff6ff;
-  color: #1d4ed8;
-  border-color: #bfdbfe;
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border-color: rgba(59, 130, 246, 0.2);
 }
 
 .checkmarkIcon {
@@ -208,8 +208,8 @@
 .spinner {
   width: 9px;
   height: 9px;
-  border: 2px solid #bfdbfe;
-  border-top: 2px solid #2563eb;
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-top: 2px solid #3b82f6;
   border-radius: 50%;
   display: inline-block;
   animation: spin 0.8s linear infinite;
@@ -226,7 +226,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  background: #f9fafb;
+  background: #18181b;
   flex-grow: 1;
   min-height: 280px;
 }
@@ -249,12 +249,12 @@
 .workspaceTitle {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #111827;
+  color: #ffffff;
 }
 
 .timeframeBadgeGrid {
   display: flex;
-  background: #e5e7eb;
+  background: #27272a;
   padding: 2px;
   border-radius: 6px;
 }
@@ -265,15 +265,15 @@
   padding: 0.15rem 0.4rem;
   font-size: 0.6rem;
   font-weight: 700;
-  color: #6b7280;
+  color: #a1a1aa;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .timeframeBtnActive {
-  background: #ffffff;
-  color: #111827;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background: #3f3f46;
+  color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .toolbarNavigation {
@@ -283,8 +283,8 @@
 }
 
 .navArrow {
-  background: #ffffff;
-  border: 1px solid #d1d5db;
+  background: #27272a;
+  border: 1px solid #3f3f46;
   border-radius: 4px;
   width: 20px;
   height: 20px;
@@ -293,27 +293,26 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #4b5563;
+  color: #d4d4d8;
 }
 
 .navArrow:hover {
-  background: #f3f4f6;
+  background: #3f3f46;
 }
 
 .navWeekLabel {
   font-size: 0.6rem;
   font-weight: 700;
-  color: #9ca3af;
+  color: #71717a;
   letter-spacing: 0.05em;
 }
 
-/* Timesheet Matrix Table */
+/* Timesheet Matrix Table (Excel-like Gridlines) */
 .timesheetGridWrapper {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: #18181b;
+  border: 1px solid #27272a;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .timesheetTable {
@@ -325,14 +324,20 @@
 
 .timesheetTable th,
 .timesheetTable td {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #27272a;
+  border-right: 1px solid #27272a;
+  padding: 0; /* Padding is 0 for cell text input overlay */
+}
+
+.timesheetTable th {
   padding: 0.4rem 0.6rem;
+  border-bottom: 2px solid #27272a;
 }
 
 .colProjectTask {
   width: 32%;
   font-weight: 700;
-  color: #374151;
+  color: #e4e4e7;
 }
 
 .colDay {
@@ -343,33 +348,34 @@
 .dayLabel {
   display: block;
   font-weight: 700;
-  color: #374151;
+  color: #e4e4e7;
 }
 
 .dayDate {
   display: block;
   font-size: 0.6rem;
-  color: #9ca3af;
+  color: #71717a;
 }
 
 .colTotal {
   width: 13%;
   text-align: right;
   font-weight: 700;
-  color: #374151;
+  color: #e4e4e7;
+  padding-right: 0.6rem !important;
 }
 
 /* Collapsible Project Row */
 .projectHeaderRow {
-  background: #f3f4f6;
+  background: #27272a;
   font-weight: 700;
-  color: #1f2937;
+  color: #ffffff;
   cursor: pointer;
 }
 
 .projectHeaderCell {
   font-size: 0.75rem;
-  padding-left: 0.5rem;
+  padding: 0.45rem 0.5rem !important;
   text-align: left;
 }
 
@@ -378,7 +384,7 @@
   font-size: 0.6rem;
   margin-right: 0.25rem;
   transition: transform 0.2s;
-  color: #6b7280;
+  color: #a1a1aa;
 }
 
 .arrowRight {
@@ -392,90 +398,94 @@
 .projectTotalVal {
   text-align: right;
   font-weight: 700;
-  color: #111827;
-  padding-right: 0.6rem;
+  color: #ffffff;
+  padding-right: 0.6rem !important;
 }
 
 /* Task Input Row */
 .taskInputRow {
-  background: #ffffff;
+  background: #1b1b1f;
 }
 
 .taskInputRow:hover {
-  background: #f9fafb;
+  background: #202026;
 }
 
 .taskTitleCell {
-  color: #4b5563;
+  color: #d4d4d8;
   font-weight: 500;
-  padding-left: 1.25rem;
+  padding-left: 1.25rem !important;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .taskBullet {
-  color: #2563eb;
+  color: #3b82f6;
   margin-right: 0.2rem;
 }
 
+/* Excel-like Cell Container & Highlight */
 .taskCellInputContainer {
   text-align: center;
-  padding: 0.2rem !important;
+  padding: 0 !important;
+  position: relative;
+  height: 38px;
+}
+
+.taskCellInputContainer:focus-within {
+  box-shadow: inset 0 0 0 2px #3b82f6; /* Excel Blue Focus Outline */
+  background: rgba(59, 130, 246, 0.08);
+  z-index: 10;
 }
 
 .gridHourInput {
   width: 100%;
-  max-width: 44px;
-  background: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
+  height: 100%;
+  min-height: 36px;
+  background: transparent;
+  border: none !important;
   padding: 0.15rem 0.25rem;
   font-family: monospace;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   text-align: center;
-  color: #111827;
+  color: #ffffff;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.gridHourInput:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
 }
 
 .taskTotalCell {
   text-align: right;
   font-family: monospace;
   font-weight: 700;
-  color: #111827;
-  padding-right: 0.6rem;
+  color: #ffffff;
+  padding-right: 0.6rem !important;
 }
 
 /* Totals Row */
 .gridTotalsRow {
-  background: #f9fafb;
+  background: #27272a;
   font-weight: 700;
-  color: #111827;
+  color: #ffffff;
 }
 
 .totalsTitleCell {
-  color: #374151;
+  color: #ffffff;
   font-weight: 750;
-  padding-left: 0.6rem;
+  padding: 0.45rem 0.6rem !important;
 }
 
 .dayTotalCell {
   text-align: center;
   font-family: monospace;
-  color: #374151;
+  color: #ffffff;
+  padding: 0.45rem 0.6rem !important;
 }
 
 .grandTotalCell {
   text-align: right;
   font-family: monospace;
-  color: #2563eb;
-  padding-right: 0.6rem;
+  color: #60a5fa;
+  padding: 0.45rem 0.6rem !important;
 }
 
 /* Add Task form in App Frame */
@@ -487,17 +497,17 @@
 
 .appAddTaskInput {
   flex: 1;
-  background: #ffffff;
-  border: 1px solid #d1d5db;
+  background: #27272a;
+  border: 1px solid #3f3f46;
   border-radius: 6px;
   padding: 0.35rem 0.65rem;
-  color: #111827;
+  color: #ffffff;
   font-size: 0.75rem;
   outline: none;
 }
 
 .appAddTaskInput:focus {
-  border-color: #2563eb;
+  border-color: #3b82f6;
 }
 
 .appAddTaskBtn {

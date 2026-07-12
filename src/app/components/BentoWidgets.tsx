@@ -45,6 +45,48 @@ export function TimeMatrixDemoWidget() {
     return () => clearTimeout(delay);
   }, [entries]);
 
+  const handleKeyDown = (taskId: string, dayIdx: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    let nextTaskId = taskId;
+    let nextDayIdx = dayIdx;
+
+    if (e.key === 'ArrowUp') {
+      const idx = tasks.findIndex(t => t.id === taskId);
+      if (idx > 0) {
+        nextTaskId = tasks[idx - 1].id;
+        e.preventDefault();
+      }
+    } else if (e.key === 'ArrowDown') {
+      const idx = tasks.findIndex(t => t.id === taskId);
+      if (idx < tasks.length - 1) {
+        nextTaskId = tasks[idx + 1].id;
+        e.preventDefault();
+      }
+    } else if (e.key === 'ArrowLeft') {
+      if (dayIdx > 0) {
+        nextDayIdx = dayIdx - 1;
+        e.preventDefault();
+      }
+    } else if (e.key === 'ArrowRight') {
+      if (dayIdx < 4) {
+        nextDayIdx = dayIdx + 1;
+        e.preventDefault();
+      }
+    } else if (e.key === 'Enter') {
+      const idx = tasks.findIndex(t => t.id === taskId);
+      if (idx < tasks.length - 1) {
+        nextTaskId = tasks[idx + 1].id;
+        e.preventDefault();
+      }
+    }
+
+    if (nextTaskId !== taskId || nextDayIdx !== dayIdx) {
+      const el = document.getElementById(`input_${nextTaskId}_${nextDayIdx}`);
+      if (el) {
+        (el as HTMLInputElement).focus();
+      }
+    }
+  };
+
   const handleCellChange = (taskId: string, dayIndex: number, val: string) => {
     // Keep it as a string to allow editing (e.g. typing decimals)
     setEntries(prev => ({
@@ -217,9 +259,12 @@ export function TimeMatrixDemoWidget() {
                           return (
                             <td key={dayIdx} className={styles.taskCellInputContainer}>
                               <input
+                                id={`input_${t.id}_${dayIdx}`}
                                 type="text"
                                 value={val}
                                 onChange={(e) => handleCellChange(t.id, dayIdx, e.target.value)}
+                                onKeyDown={(e) => handleKeyDown(t.id, dayIdx, e)}
+                                onFocus={(e) => e.target.select()}
                                 className={styles.gridHourInput}
                                 placeholder="0"
                               />
