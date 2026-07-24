@@ -15,45 +15,9 @@ export default function Home() {
         </p>
       </header>
 
-      <div className={styles.bentoGrid}>
+      <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '0 1rem', paddingBottom: '6rem' }}>
         {/* Flagship interactive app demo */}
         <TimeMatrixDemoWidget />
-
-        {/* Business inquiries card */}
-        <BusinessInquiryWidget />
-
-        {/* Value Prop A */}
-        <div className={styles.bentoCard}>
-          <div>
-            <h3 className={styles.cardTitle}>Offline-First Reliability</h3>
-            <p className={styles.cardDesc}>
-              No internet? No problem. Your team can continue tracking time even when offline. Data is securely saved locally and auto-syncs to the cloud once restored.
-            </p>
-          </div>
-          <div className={styles.cardFeatureList}>
-            <div className={styles.featureItem}>✓ Auto-recovery sync</div>
-            <div className={styles.featureItem}>✓ Zero data loss guarantee</div>
-            <div className={styles.featureItem}>✓ Works in remote areas</div>
-          </div>
-        </div>
-
-        {/* Value Prop B / Cost Comparison */}
-        <CostComparisonWidget />
-
-        {/* Value Prop C */}
-        <div className={styles.bentoCard}>
-          <div>
-            <h3 className={styles.cardTitle}>One-Click Reports</h3>
-            <p className={styles.cardDesc}>
-              Generate client summaries, payroll summaries, or invoice reports instantly. Easily export your logs to CSV, Excel, or PDF to hook directly into your bookkeeping software.
-            </p>
-          </div>
-          <div className={styles.cardFeatureList}>
-            <div className={styles.featureItem}>✓ CSV/Excel exports</div>
-            <div className={styles.featureItem}>✓ QuickBooks/Xero ready</div>
-            <div className={styles.featureItem}>✓ Client billing summaries</div>
-          </div>
-        </div>
       </div>
     </div>
   );

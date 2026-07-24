@@ -156,17 +156,17 @@ export function TimeMatrixDemoWidget() {
   }, [dayTotals]);
 
   return (
-    <div className={`${styles.bentoCard} ${styles.flagshipCard}`}>
+    <div style={{ width: '100%', minHeight: '800px', display: 'flex', flexDirection: 'column', borderRadius: '1rem', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)', border: '1px solid #27272a', backgroundColor: '#18181b' }}>
       {/* Hero Marketing Copy */}
       <div className={styles.heroContent}>
         <h2 className={styles.heroTitle}>Excel-Fast Time Tracking. Flat $9/Month.</h2>
         <p className={styles.heroSubtitle}>No per-seat fees. Offline-first. Built for small teams and freelancers who hate clunky software.</p>
-        <a href="/timematrix" className={styles.heroBtn}>Launch TimeMatrix Free</a>
+        <a href="/timematrix/index.html" className={styles.heroBtn}>Launch TimeMatrix Free</a>
         <p className={styles.heroSubText}>Zero signup required to test &bull; Instant CSV Export</p>
       </div>
 
       {/* Desktop App Frame Container */}
-      <div className={styles.appContainerFrame}>
+      <div className={styles.appContainerFrame} style={{ flex: 1 }}>
         {/* App Header */}
         <header className={styles.appHeader}>
           <div className={styles.appHeaderLeft}>

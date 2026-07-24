@@ -17,22 +17,14 @@ export default function Navigation() {
           className="nav-link"
           data-active={pathname === '/'}
         >
-          Home
+          TimeMatrix Demo
         </Link>
-        <Link 
-          href="/stream" 
-          className="nav-link"
-          data-active={pathname === '/stream'}
+        <a 
+          href="/timematrix/index.html" 
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-lg font-bold text-sm shadow-sm transition-colors ml-4"
         >
-          Stream
-        </Link>
-        <Link 
-          href="/toolbox" 
-          className="nav-link"
-          data-active={pathname === '/toolbox'}
-        >
-          Toolbox
-        </Link>
+          Log In to App
+        </a>
       </div>
     </nav>
   );
