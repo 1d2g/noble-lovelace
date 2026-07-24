@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'dg.tools | Flat-Rate Time Tracking for Small Teams',
   description: 'Simple, offline-first time tracking with zero per-seat fees. $9/month flat.',
   openGraph: {
-    title: 'TimeMatrix by dg.tools',
+    title: 'VeloTime by dg.tools',
     description: 'Flat-rate time tracking software for freelancers and small teams.',
     url: 'https://dg.tools',
     siteName: 'dg.tools',

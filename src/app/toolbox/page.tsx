@@ -11,9 +11,9 @@ export default function Toolbox() {
       <div className={styles.productGrid}>
         <a href="#" className="card">
           <div className={styles.productIcon}>
-            <span>TM</span>
+            <span>VT</span>
           </div>
-          <h2 className="card-title">timematrix</h2>
+          <h2 className="card-title">VeloTime</h2>
           <p className="card-desc">Advanced time tracking and visualization matrix.</p>
         </a>
 

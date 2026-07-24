@@ -11,7 +11,7 @@ export default function Home() {
       <header className={styles.header}>
         <h1 className={styles.title}>Simple, Reliable Time Tracking for Small Teams</h1>
         <p className={styles.subtitle}>
-          timematrix helps small businesses track project hours, log employee time, and generate accurate invoices without the complexity or high per-seat fees of other platforms.
+          VeloTime helps small businesses track project hours, log employee time, and generate accurate invoices without the complexity or high per-seat fees of other platforms.
         </p>
       </header>
 

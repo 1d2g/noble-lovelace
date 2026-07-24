@@ -17,10 +17,10 @@ export default function Navigation() {
           className="nav-link"
           data-active={pathname === '/'}
         >
-          TimeMatrix Demo
+          VeloTime Demo
         </Link>
         <a 
-          href="/timematrix/index.html" 
+          href="/velotime/index.html" 
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-lg font-bold text-sm shadow-sm transition-colors ml-4"
         >
           Log In to App
