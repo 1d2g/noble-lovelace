@@ -6,8 +6,14 @@ import Navigation from './components/Navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'dg.tools',
-  description: 'Welcome to dgtools',
+  title: 'dg.tools | Flat-Rate Time Tracking for Small Teams',
+  description: 'Simple, offline-first time tracking with zero per-seat fees. $9/month flat.',
+  openGraph: {
+    title: 'TimeMatrix by dg.tools',
+    description: 'Flat-rate time tracking software for freelancers and small teams.',
+    url: 'https://dg.tools',
+    siteName: 'dg.tools',
+  },
 }
 
 export default function RootLayout({

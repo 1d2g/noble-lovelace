@@ -747,6 +747,84 @@
   .flagshipCard {
     grid-column: span 2;
   }
+/* Hero Marketing Copy */
+.heroContent {
+  padding: 2.5rem 2.5rem 1.5rem 2.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.heroTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+.heroSubtitle {
+  font-size: 1.05rem;
+  color: #a1a1aa;
+  max-width: 600px;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+.heroBtn {
+  background: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+.heroBtn:hover {
+  background: #2563eb;
+}
+.heroSubText {
+  font-size: 0.8rem;
+  color: #71717a;
+}
+
+/* Cost Comparison Widget */
+.comparisonCard {
+  background: rgba(33, 33, 33, 0.45);
+}
+.comparisonTable {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.comparisonRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.comparisonRowActive {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.compName {
+  color: #e4e4e7;
+}
+.compPrice {
+  color: #fff;
+}
+.compSub {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-weight: 400;
 }
 
 @media (max-width: 640px) {

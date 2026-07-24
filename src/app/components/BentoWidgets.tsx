@@ -157,6 +157,14 @@ export function TimeMatrixDemoWidget() {
 
   return (
     <div className={`${styles.bentoCard} ${styles.flagshipCard}`}>
+      {/* Hero Marketing Copy */}
+      <div className={styles.heroContent}>
+        <h2 className={styles.heroTitle}>Excel-Fast Time Tracking. Flat $9/Month.</h2>
+        <p className={styles.heroSubtitle}>No per-seat fees. Offline-first. Built for small teams and freelancers who hate clunky software.</p>
+        <a href="/timematrix" className={styles.heroBtn}>Launch TimeMatrix Free</a>
+        <p className={styles.heroSubText}>Zero signup required to test &bull; Instant CSV Export</p>
+      </div>
+
       {/* Desktop App Frame Container */}
       <div className={styles.appContainerFrame}>
         {/* App Header */}
@@ -430,6 +438,28 @@ export function BusinessInquiryWidget() {
           </div>
         </form>
       )}
+    </div>
+  );
+}
+
+// 3. Cost Comparison Widget
+export function CostComparisonWidget() {
+  return (
+    <div className={`${styles.bentoCard} ${styles.comparisonCard}`}>
+      <div>
+        <h3 className={styles.cardTitle}>Why pay per seat?</h3>
+        <p className={styles.cardDesc}>Compare the annual cost for a team of 10 users:</p>
+      </div>
+      <div className={styles.comparisonTable}>
+        <div className={styles.comparisonRow}>
+          <span className={styles.compName}>Harvest / Toggl</span>
+          <span className={styles.compPrice}>~$1,200/yr</span>
+        </div>
+        <div className={styles.comparisonRowActive}>
+          <span className={styles.compName}>TimeMatrix</span>
+          <span className={styles.compPrice}>$108/yr <span className={styles.compSub}>($9/mo)</span></span>
+        </div>
+      </div>
     </div>
   );
 }
