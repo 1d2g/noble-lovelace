@@ -1,6 +1,6 @@
 import styles from './page.module.css';
 import {
-  TimeMatrixDemoWidget,
+  VeloTimeDemoWidget,
   BusinessInquiryWidget,
   CostComparisonWidget
 } from './components/BentoWidgets';
@@ -17,7 +17,7 @@ export default function Home() {
 
       <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '0 1rem', paddingBottom: '6rem' }}>
         {/* Flagship interactive app demo */}
-        <TimeMatrixDemoWidget />
+        <VeloTimeDemoWidget />
       </div>
     </div>
   );

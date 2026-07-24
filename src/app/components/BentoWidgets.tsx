@@ -8,8 +8,8 @@ interface Task {
   name: string;
 }
 
-// 1. High-Fidelity timematrix App Demo Widget
-export function TimeMatrixDemoWidget() {
+// 1. High-Fidelity VeloTime App Demo Widget
+export function VeloTimeDemoWidget() {
   const [activeAppTab, setActiveAppTab] = useState('Timesheets');
   const [timeframe, setTimeframe] = useState('week'); // 'day', 'week', 'month'
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -164,7 +164,7 @@ export function TimeMatrixDemoWidget() {
           No per-seat fees. Offline-first. Built for small teams and freelancers who hate clunky software.
         </p>
         <a 
-          href="/timematrix/index.html" 
+          href="/velotime/index.html" 
           style={{ 
             display: 'inline-block', 
             backgroundColor: '#2563eb', 
@@ -386,7 +386,7 @@ export function BusinessInquiryWidget() {
     <div className={`${styles.bentoCard} ${styles.inquiriesCard}`}>
       <div>
         <h3 className={styles.cardTitle}>Product Inquiries</h3>
-        <p className={styles.cardDesc}>Interested in timematrix for your team? Send a message and let's discuss how we can support your business.</p>
+        <p className={styles.cardDesc}>Interested in VeloTime for your team? Send a message and let's discuss how we can support your business.</p>
       </div>
 
       {status === 'success' ? (
@@ -477,7 +477,7 @@ export function CostComparisonWidget() {
           <span className={styles.compPrice}>~$1,200/yr</span>
         </div>
         <div className={styles.comparisonRowActive}>
-          <span className={styles.compName}>TimeMatrix</span>
+          <span className={styles.compName}>VeloTime</span>
           <span className={styles.compPrice}>$108/yr <span className={styles.compSub}>($9/mo)</span></span>
         </div>
       </div>
