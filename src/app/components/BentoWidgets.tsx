@@ -158,11 +158,32 @@ export function TimeMatrixDemoWidget() {
   return (
     <div style={{ width: '100%', minHeight: '800px', display: 'flex', flexDirection: 'column', borderRadius: '1rem', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)', border: '1px solid #27272a', backgroundColor: '#18181b' }}>
       {/* Hero Marketing Copy */}
-      <div className={styles.heroContent}>
-        <h2 className={styles.heroTitle}>Excel-Fast Time Tracking. Flat $9/Month.</h2>
-        <p className={styles.heroSubtitle}>No per-seat fees. Offline-first. Built for small teams and freelancers who hate clunky software.</p>
-        <a href="/timematrix/index.html" className={styles.heroBtn}>Launch TimeMatrix Free</a>
-        <p className={styles.heroSubText}>Zero signup required to test &bull; Instant CSV Export</p>
+      <div style={{ padding: '3rem 2rem', textAlign: 'center', backgroundColor: '#18181b', borderBottom: '1px solid #27272a' }}>
+        <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: '#f4f4f5', marginBottom: '1rem', letterSpacing: '-0.02em' }}>Excel-Fast Time Tracking. Flat $9/Month.</h2>
+        <p style={{ fontSize: '1.1rem', color: '#a1a1aa', maxWidth: '600px', margin: '0 auto 2rem auto', lineHeight: 1.5 }}>
+          No per-seat fees. Offline-first. Built for small teams and freelancers who hate clunky software.
+        </p>
+        <a 
+          href="/timematrix/index.html" 
+          style={{ 
+            display: 'inline-block', 
+            backgroundColor: '#2563eb', 
+            color: '#ffffff', 
+            padding: '1rem 2.5rem', 
+            borderRadius: '0.75rem', 
+            fontWeight: 700, 
+            fontSize: '1.25rem', 
+            textDecoration: 'none',
+            boxShadow: '0 10px 25px -5px rgba(37, 99, 235, 0.4)',
+            transition: 'transform 0.2s',
+            marginBottom: '1rem'
+          }}
+        >
+          Start 2-Week Free Demo
+        </a>
+        <p style={{ fontSize: '0.85rem', color: '#71717a', fontWeight: 500 }}>
+          Zero signup required to test &bull; Instant CSV Export if you choose not to subscribe
+        </p>
       </div>
 
       {/* Desktop App Frame Container */}
