@@ -20,7 +20,7 @@ export default function Navigation() {
           VeloTime Demo
         </Link>
         <a 
-          href="/velotime/index.html" 
+          href="https://velotime.dg.tools" 
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-lg font-bold text-sm shadow-sm transition-colors ml-4"
         >
           Log In to App

@@ -164,7 +164,7 @@ export function VeloTimeDemoWidget() {
           No per-seat fees. Offline-first. Built for small teams and freelancers who hate clunky software.
         </p>
         <a 
-          href="/velotime/index.html" 
+          href="https://velotime.dg.tools" 
           style={{ 
             display: 'inline-block', 
             backgroundColor: '#2563eb', 
