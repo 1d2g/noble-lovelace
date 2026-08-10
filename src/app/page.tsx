@@ -7,6 +7,11 @@ import {
 
 export default function Home() {
   return (
+    <script>
+      if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost') {
+            window.location.replace('https://' + window.location.host + window.location.pathname + window.location.search + window.location.hash);
+    }
+  </script>
     <div className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.title}>Simple, Reliable Time Tracking for Small Teams</h1>
