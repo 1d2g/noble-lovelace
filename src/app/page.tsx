@@ -26,8 +26,16 @@ export default function Home() {
         </header>
 
         <div style={{ width: '100%', maxWidth: '1200px', margin: '0 auto', padding: '0 1rem', paddingBottom: '6rem' }}>
-          {/* Flagship interactive app demo */}
-          <VeloTimeDemoWidget />
+          <div className={styles.bentoGrid}>
+            <div className={styles.flagshipCard}>
+              {/* Flagship interactive app demo */}
+              <VeloTimeDemoWidget />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <CostComparisonWidget />
+              <BusinessInquiryWidget />
+            </div>
+          </div>
         </div>
       </div>
     </>

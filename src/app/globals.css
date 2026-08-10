@@ -1,11 +1,11 @@
 :root {
-  --bg-main: #0f0f0f;
-  --bg-card: #212121;
-  --bg-card-hover: #3d3d3d;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --text-primary: #f1f1f1;
-  --text-secondary: #aaaaaa;
-  --accent: #3ea6ff;
+  --bg-main: #ffffff;
+  --bg-card: #f8fafc;
+  --bg-card-hover: #f1f5f9;
+  --border-color: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent: #2563eb;
 }
 
 * {

@@ -6,6 +6,10 @@ import Navigation from './components/Navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://dg.tools'),
+  alternates: {
+    canonical: '/',
+  },
   title: 'dg.tools | Flat-Rate Time Tracking for Small Teams',
   description: 'Simple, offline-first time tracking with zero per-seat fees. $9/month flat.',
   openGraph: {

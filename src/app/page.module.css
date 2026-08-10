@@ -13,11 +13,9 @@
 
 .title {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #ffffff 0%, #a5a5a5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-primary);
 }
 
 .subtitle {
@@ -35,38 +33,31 @@
 }
 
 .bentoCard {
-  background: rgba(33, 33, 33, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background: var(--bg-main);
+  border: 2px solid var(--border-color);
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.2s;
   position: relative;
   overflow: hidden;
   gap: 1.25rem;
 }
 
 .bentoCard:hover {
-  transform: translateY(-4px);
-  border-color: rgba(62, 166, 255, 0.3);
-  box-shadow: 0 12px 30px rgba(62, 166, 255, 0.08);
+  border-color: var(--text-primary);
 }
 
 .flagshipCard {
   grid-column: span 2;
   grid-row: span 2;
-  background: linear-gradient(135deg, rgba(62, 166, 255, 0.04) 0%, rgba(33, 33, 33, 0.45) 100%);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: var(--bg-card);
   padding: 0;
 }
 
 .flagshipCard:hover {
-  border-color: rgba(62, 166, 255, 0.35);
-  box-shadow: 0 12px 30px rgba(62, 166, 255, 0.1);
+  border-color: var(--text-primary);
 }
 
 .cardTitle {
@@ -87,10 +78,10 @@
   display: inline-block;
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent);
-  background: rgba(62, 166, 255, 0.15);
+  color: var(--bg-main);
+  background: var(--text-primary);
   padding: 0.2rem 0.5rem;
-  border-radius: 9999px;
+  border: 1px solid var(--text-primary);
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;

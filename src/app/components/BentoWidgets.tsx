@@ -463,24 +463,76 @@ export function BusinessInquiryWidget() {
   );
 }
 
-// 3. Cost Comparison Widget
+// 3. Hub-and-Spoke Funnel: Billable Rate / Cost Calculator
 export function CostComparisonWidget() {
+  const [employees, setEmployees] = useState(5);
+  const [hourlyRate, setHourlyRate] = useState(150);
+  
+  // A solo freelancer doing timesheets by hand wastes about 2 hours a week chasing hours/invoicing.
+  // A team of 5 wastes even more. Let's calculate the "Leaked Billables"
+  const weeklyWastedHoursPerEmployee = 1.5;
+  const annualWastedHours = employees * weeklyWastedHoursPerEmployee * 50; // 50 weeks
+  const annualLeakedRevenue = annualWastedHours * hourlyRate;
+
   return (
     <div className={`${styles.bentoCard} ${styles.comparisonCard}`}>
       <div>
-        <h3 className={styles.cardTitle}>Why pay per seat?</h3>
-        <p className={styles.cardDesc}>Compare the annual cost for a team of 10 users:</p>
+        <div className={styles.badge}>ROI Calculator</div>
+        <h3 className={styles.cardTitle}>Calculate your Leaked Billables</h3>
+        <p className={styles.cardDesc}>See how much revenue your team is losing every year to clunky time tracking and Friday afternoon timesheet chasing.</p>
       </div>
-      <div className={styles.comparisonTable}>
-        <div className={styles.comparisonRow}>
-          <span className={styles.compName}>Harvest / Toggl</span>
-          <span className={styles.compPrice}>~$1,200/yr</span>
+      
+      <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div>
+          <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>Team Size: {employees} employees</label>
+          <input 
+            type="range" 
+            min="1" 
+            max="50" 
+            value={employees} 
+            onChange={(e) => setEmployees(parseInt(e.target.value))}
+            style={{ width: '100%', accentColor: 'var(--text-primary)' }}
+          />
         </div>
-        <div className={styles.comparisonRowActive}>
-          <span className={styles.compName}>VeloTime</span>
-          <span className={styles.compPrice}>$108/yr <span className={styles.compSub}>($9/mo)</span></span>
+        <div>
+          <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>Average Hourly Rate: ${hourlyRate}/hr</label>
+          <input 
+            type="range" 
+            min="50" 
+            max="500" 
+            step="10"
+            value={hourlyRate} 
+            onChange={(e) => setHourlyRate(parseInt(e.target.value))}
+            style={{ width: '100%', accentColor: 'var(--text-primary)' }}
+          />
         </div>
       </div>
+
+      <div style={{ marginTop: '1.5rem', padding: '1rem', backgroundColor: 'var(--bg-main)', border: '2px solid var(--text-primary)' }}>
+        <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Annual Leaked Revenue</p>
+        <p style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)' }}>${annualLeakedRevenue.toLocaleString()}</p>
+        <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Based on {weeklyWastedHoursPerEmployee} hours wasted per week per employee on manual time tracking.</p>
+      </div>
+
+      <a 
+        href="https://velotime.dg.tools" 
+        style={{
+          display: 'block',
+          width: '100%',
+          textAlign: 'center',
+          backgroundColor: 'var(--text-primary)',
+          color: 'var(--bg-main)',
+          padding: '1rem',
+          fontWeight: 700,
+          textDecoration: 'none',
+          marginTop: '1rem',
+          transition: 'opacity 0.2s'
+        }}
+        onMouseOver={(e) => e.currentTarget.style.opacity = '0.8'}
+        onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+      >
+        Plug the leak with VeloTime &rarr;
+      </a>
     </div>
   );
 }
