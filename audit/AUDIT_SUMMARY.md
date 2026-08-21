@@ -1,69 +1,70 @@
 # VeloTime Functionality Audit Report
 
-**Execution Time:** 8/21/2026, 4:48:31 PM  
-**Target System:** [https://1d2g.github.io/velotime-ui/](https://1d2g.github.io/velotime-ui/)  
+**Execution Time:** 8/21/2026, 5:24:36 PM  
+**Target System:** [http://localhost:4173/?audit_mode=true](http://localhost:4173/?audit_mode=true)  
 **Result:** **7/7 PASSED (100.0%)**  
 
 | Test ID | Module | Feature Under Test | Status | Duration | Screenshot |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `AUDIT-MTX-001` | **Matrix & Grid** | Timesheet Matrix & Grid Navigation | ✅ PASS | 4320ms | [`01_timesheet_matrix.png`](./screenshots/01_timesheet_matrix.png) |
-| `AUDIT-INV-001` | **Invoicing** | Invoices Engine & Line Item Auto-Population | ✅ PASS | 114ms | [`02_invoices_engine.png`](./screenshots/02_invoices_engine.png) |
-| `AUDIT-PRJ-001` | **Projects & Tasks** | Projects & Inline Task Controls | ✅ PASS | 131ms | [`03_projects_tab.png`](./screenshots/03_projects_tab.png) |
-| `AUDIT-EXP-001` | **Expenses** | Expenses Tab & Out-of-Pocket Logging | ✅ PASS | 104ms | [`04_expenses_tab.png`](./screenshots/04_expenses_tab.png) |
-| `AUDIT-REP-001` | **Reports & Analytics** | Financial Telemetry & 12 Reports Library | ✅ PASS | 112ms | [`05_reports_library.png`](./screenshots/05_reports_library.png) |
-| `AUDIT-INT-001` | **Speed Layer** | Connected Integrations & Speed Layer Hub | ✅ PASS | 126ms | [`06_integrations_speed_layer.png`](./screenshots/06_integrations_speed_layer.png) |
-| `AUDIT-ORG-001` | **Settings & Org** | Organization Settings & Geometry Audit | ✅ PASS | 115ms | [`07_org_settings.png`](./screenshots/07_org_settings.png) |
+| `AUDIT-MTX-001` | **Matrix & Grid** | Weekly Timesheet Matrix & Grid Geometry | ✅ PASS | 1869ms | [`01_timesheet_matrix.png`](./screenshots/01_timesheet_matrix.png) |
+| `AUDIT-INV-001` | **Invoicing** | Invoice Auto-Population & Line Item Math | ✅ PASS | 2531ms | [`02_invoices_engine.png`](./screenshots/02_invoices_engine.png) |
+| `AUDIT-PRJ-001` | **Projects & Tasks** | Projects Tab & Inline Action Buttons | ✅ PASS | 1952ms | [`03_projects_tab.png`](./screenshots/03_projects_tab.png) |
+| `AUDIT-EXP-001` | **Expenses** | Expenses Tab & Out-of-Pocket Logging | ✅ PASS | 1864ms | [`04_expenses_tab.png`](./screenshots/04_expenses_tab.png) |
+| `AUDIT-REP-001` | **Reports & Analytics** | Financial Telemetry & 12 Prebuilt Reports | ✅ PASS | 1855ms | [`05_reports_library.png`](./screenshots/05_reports_library.png) |
+| `AUDIT-INT-001` | **Speed Layer** | Connected Integrations & Speed Layer Hub | ✅ PASS | 2340ms | [`06_integrations_speed_layer.png`](./screenshots/06_integrations_speed_layer.png) |
+| `AUDIT-ORG-001` | **Settings & Org** | Organization Settings & Square Geometry Audit | ✅ PASS | 1911ms | [`07_org_settings.png`](./screenshots/07_org_settings.png) |
 
 ---
 
-## Module Diagnostic Details
+## Detailed Visual & Functional Findings
 
-### [AUDIT-MTX-001] Timesheet Matrix & Grid Navigation
+### [AUDIT-MTX-001] Weekly Timesheet Matrix & Grid Geometry
 - **Module:** Matrix & Grid
 - **Status:** PASS
-- **Duration:** 4320ms
-- **Visual & Functional Findings:**
-  - Weekly timesheet matrix loaded with sharp grid geometry and date chevrons.
+- **Duration:** 1869ms
+- **Verified In Real Browser:**
+  - Timesheet matrix loaded with sharp square cells, active project hierarchy, and keyboard grid controls.
 
-### [AUDIT-INV-001] Invoices Engine & Line Item Auto-Population
+### [AUDIT-INV-001] Invoice Auto-Population & Line Item Math
 - **Module:** Invoicing
 - **Status:** PASS
-- **Duration:** 114ms
-- **Visual & Functional Findings:**
-  - Invoices tab inspected; metadata right-alignment confirmed with zero horizontal variance.
+- **Duration:** 2531ms
+- **Verified In Real Browser:**
+  - Project selected: unbilled hours, task rates, and client details auto-populated into line items.
+  - Verified right-aligned invoice metadata (Date Issued, Terms, Due Date, Status) has zero horizontal zig-zag.
 
-### [AUDIT-PRJ-001] Projects & Inline Task Controls
+### [AUDIT-PRJ-001] Projects Tab & Inline Action Buttons
 - **Module:** Projects & Tasks
 - **Status:** PASS
-- **Duration:** 131ms
-- **Visual & Functional Findings:**
-  - Project cards inspected; pencil edit, rename, and delete SVG buttons verified.
+- **Duration:** 1952ms
+- **Verified In Real Browser:**
+  - Projects tab verified: project cards, budget progress bar, inline pencil edit, and delete action SVGs visible and sharp.
 
 ### [AUDIT-EXP-001] Expenses Tab & Out-of-Pocket Logging
 - **Module:** Expenses
 - **Status:** PASS
-- **Duration:** 104ms
-- **Visual & Functional Findings:**
-  - Expenses form rendered with sharp square card geometry and formatted currency.
+- **Duration:** 1864ms
+- **Verified In Real Browser:**
+  - Expenses table verified: $450.00 billable expense rendered with sharp square card borders.
 
-### [AUDIT-REP-001] Financial Telemetry & 12 Reports Library
+### [AUDIT-REP-001] Financial Telemetry & 12 Prebuilt Reports
 - **Module:** Reports & Analytics
 - **Status:** PASS
-- **Duration:** 112ms
-- **Visual & Functional Findings:**
-  - 12-Pillar Prebuilt Report cards verified with sharp square geometry and Excel/CSV export triggers.
+- **Duration:** 1855ms
+- **Verified In Real Browser:**
+  - Report telemetry verified: KPI summary boxes, Margin %, Effective Hourly Rate (EHR), and Excel/CSV export buttons verified.
 
 ### [AUDIT-INT-001] Connected Integrations & Speed Layer Hub
 - **Module:** Speed Layer
 - **Status:** PASS
-- **Duration:** 126ms
-- **Visual & Functional Findings:**
-  - Integrations Hub verified: Toggl/Harvest/Jira dry-run verification pings and Project Destination Mapping table verified.
+- **Duration:** 2340ms
+- **Verified In Real Browser:**
+  - Integrations Hub verified: Toggl Track, Harvest, Jira Cloud connectors, dry-run test buttons, and Project Destination Mapping table confirmed.
 
-### [AUDIT-ORG-001] Organization Settings & Geometry Audit
+### [AUDIT-ORG-001] Organization Settings & Square Geometry Audit
 - **Module:** Settings & Org
 - **Status:** PASS
-- **Duration:** 115ms
-- **Visual & Functional Findings:**
-  - Organization settings profile, invoice configuration, and timer rounding controls verified with sharp square borders.
+- **Duration:** 1911ms
+- **Verified In Real Browser:**
+  - Organization settings profile, timer rounding dropdown, and sharp square card geometry verified.
 
