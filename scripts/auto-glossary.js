@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { google } = require('googleapis');
 
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || "https://discordapp.com/api/webhooks/1536514054388977665/9OUlS5hP3fz2xyzE4QYi5OPCcDSU_HnnDCMEwH1OcQpxMR_L9JKuDCADsj4ClGnLUH1b";
 
@@ -427,7 +426,7 @@ export default function DSOCalculator() {
                   </div>
                   <div className="flex justify-between items-center text-sm border-b border-slate-200 pb-2">
                     <span className="text-slate-600">Cash Collection Health:</span>
-                    <span className={`font-bold ${result.rating.includes('Healthy') ? 'text-emerald-600' : result.rating.includes('Moderate') ? 'text-amber-600' : 'text-rose-600'}`}>
+                    <span className={"font-bold " + (result.rating.includes('Healthy') ? 'text-emerald-600' : result.rating.includes('Moderate') ? 'text-amber-600' : 'text-rose-600')}>
                       {result.rating}
                     </span>
                   </div>
@@ -489,6 +488,7 @@ async function requestIndexing(urls) {
   }
 
   try {
+    const { google } = require('googleapis');
     const auth = new google.auth.GoogleAuth({
       keyFile: keyPath,
       scopes: ['https://www.googleapis.com/auth/indexing', 'https://www.googleapis.com/auth/webmasters'],
