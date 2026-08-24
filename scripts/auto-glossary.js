@@ -15,151 +15,16 @@ const keyPath = path.join(baseDir, 'service-account.json');
 const GLOSSARY_QUEUE = [
   {
     slug: 'overhead-multiplier',
+    category: 'Profitability & Margins',
     term: 'Agency Overhead Multiplier',
     searchKeywords: ['agency overhead multiplier', 'overhead rate formula', 'agency cost accounting', 'loaded labor multiplier'],
     definition: 'A financial ratio that measures total agency operating expenses relative to direct client labor costs.',
     expanded: 'The overhead multiplier is the fundamental number agencies use to determine how much indirect cost (rent, software, non-billable executive salaries, insurance) is incurred for every dollar of direct client work. If an agency spends $100,000 on developer salaries and $150,000 on overhead, the overhead multiplier is 1.5x (or a 2.5x total labor multiplier). Understanding your overhead multiplier is essential for setting profitable hourly rates and avoiding underpricing on large retainer contracts.',
-    relatedTerms: ['cost-rate', 'effective-hourly-rate', 'break-even-billing-rate'],
-    tool: {
-      slug: 'overhead-multiplier',
-      name: 'Overhead Multiplier Calculator',
-      category: 'Profitability & Pricing',
-      tag: 'Cost Accounting',
-      desc: 'Calculate your agency’s overhead multiplier and loaded labor rate to ensure all operating expenses are baked into client pricing.',
-      formulaDesc: 'Overhead Multiplier = Total Operating Expenses / Direct Billable Labor Cost',
-      defaultInputs: { directLabor: 250000, operatingExpenses: 200000, targetProfitMargin: 20 },
-      generateComponent: () => `
-'use client';
-import Breadcrumbs from '../../../components/Breadcrumbs';
-import React, { useState } from 'react';
-
-export default function OverheadMultiplierCalculator() {
-  const [directLabor, setDirectLabor] = useState(250000);
-  const [operatingExpenses, setOperatingExpenses] = useState(200000);
-  const [targetProfitMargin, setTargetProfitMargin] = useState(20);
-  const [result, setResult] = useState(null);
-
-  const calculate = () => {
-    const labor = parseFloat(directLabor) || 0;
-    const overhead = parseFloat(operatingExpenses) || 0;
-    const margin = (parseFloat(targetProfitMargin) || 0) / 100;
-
-    if (labor <= 0) return;
-
-    const multiplier = overhead / labor;
-    const totalCostMultiplier = 1 + multiplier;
-    const requiredBillingMultiplier = (1 + multiplier) / (1 - margin);
-
-    setResult({
-      multiplier: multiplier.toFixed(2),
-      totalCostMultiplier: totalCostMultiplier.toFixed(2),
-      requiredBillingMultiplier: requiredBillingMultiplier.toFixed(2),
-      breakEvenLaborCost: (labor + overhead).toLocaleString(),
-      targetRevenue: Math.round((labor + overhead) / (1 - margin)).toLocaleString()
-    });
-  };
-
-  return (
-    <div className="min-h-screen bg-slate-50 font-sans">
-      <main className="pt-32 pb-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <section className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
-          <div className="mb-8">
-            <Breadcrumbs items={[
-              { name: 'Home', path: '/' },
-              { name: 'Free Tools', path: '/tools' },
-              { name: 'Overhead Multiplier Calculator', path: '/tools/overhead-multiplier' }
-            ]} />
-          </div>
-
-          <header className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Agency Overhead Multiplier Calculator</h1>
-            <p className="text-slate-500 mt-2">
-              Determine your true overhead burden and loaded billing rate multiplier to ensure full profitability.
-            </p>
-          </header>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Direct Billable Labor Cost ($/yr)</label>
-                <input 
-                  type="number" 
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 outline-none"
-                  value={directLabor} 
-                  onChange={(e) => setDirectLabor(e.target.value)} 
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Total Non-Billable Overhead Expenses ($/yr)</label>
-                <input 
-                  type="number" 
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 outline-none"
-                  value={operatingExpenses} 
-                  onChange={(e) => setOperatingExpenses(e.target.value)} 
-                />
-                <p className="text-xs text-slate-400 mt-1">Include rent, software, legal, non-billable salaries, marketing.</p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Target Net Profit Margin (%)</label>
-                <input 
-                  type="number" 
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 outline-none"
-                  value={targetProfitMargin} 
-                  onChange={(e) => setTargetProfitMargin(e.target.value)} 
-                />
-              </div>
-
-              <button 
-                onClick={calculate}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 rounded-lg transition-colors mt-4 cursor-pointer"
-              >
-                Calculate Multiplier
-              </button>
-            </div>
-
-            <div className="bg-slate-50 rounded-xl p-6 border border-slate-200 flex flex-col justify-center">
-              {result ? (
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center text-sm border-b border-slate-200 pb-2">
-                    <span className="text-slate-600">Overhead Multiplier:</span>
-                    <span className="font-bold text-slate-900 text-lg">{result.multiplier}x</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm border-b border-slate-200 pb-2">
-                    <span className="text-slate-600">Total Loaded Cost Multiplier:</span>
-                    <span className="font-bold text-slate-900">{result.totalCostMultiplier}x</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm border-b border-slate-200 pb-2">
-                    <span className="text-slate-600">Required Billing Multiplier:</span>
-                    <span className="font-bold text-emerald-600 text-xl">{result.requiredBillingMultiplier}x</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm border-b border-slate-200 pb-2">
-                    <span className="text-slate-600">Break-Even Total Cost:</span>
-                    <span className="font-medium text-slate-800">\${result.breakEvenLaborCost}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-sm pt-1">
-                    <span className="text-slate-600">Target Agency Revenue:</span>
-                    <span className="font-bold text-slate-900">\${result.targetRevenue}</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="text-center text-slate-400 py-8">
-                  <p>Click "Calculate Multiplier" to see your agency's true loaded overhead burden.</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
-  );
-}
-`
-    }
+    relatedTerms: ['cost-rate', 'effective-hourly-rate', 'break-even-billing-rate']
   },
   {
     slug: 'bench-cost',
+    category: 'Capacity & Utilization',
     term: 'Bench Cost & Idle Capacity',
     searchKeywords: ['bench cost calculator', 'agency bench rate', 'idle capacity cost', 'unbillable consultant cost'],
     definition: 'The total loaded salary and overhead cost of retaining unassigned or underutilized billable staff between client engagements.',
@@ -308,6 +173,7 @@ export default function BenchCostCalculator() {
   },
   {
     slug: 'break-even-billing-rate',
+    category: 'Profitability & Margins',
     term: 'Break-Even Billing Rate',
     searchKeywords: ['break even billing rate formula', 'minimum hourly rate calculator', 'agency floor rate', 'freelance break even rate'],
     definition: 'The minimum hourly billing rate required to cover an employee’s fully loaded salary and proportional agency overhead, yielding exactly 0% profit.',
@@ -447,6 +313,7 @@ export default function BreakEvenRateCalculator() {
   },
   {
     slug: 'days-sales-outstanding',
+    category: 'Operations & Risk',
     term: 'Days Sales Outstanding (DSO)',
     searchKeywords: ['days sales outstanding formula', 'agency dso calculator', 'accounts receivable collection period', 'agency cash flow metric'],
     definition: 'The average number of days it takes for an agency to collect payment from clients after an invoice has been issued.',
@@ -560,7 +427,7 @@ export default function DSOCalculator() {
                   </div>
                   <div className="flex justify-between items-center text-sm border-b border-slate-200 pb-2">
                     <span className="text-slate-600">Cash Collection Health:</span>
-                    <span className={\`font-bold \${result.rating.includes('Healthy') ? 'text-emerald-600' : result.rating.includes('Moderate') ? 'text-amber-600' : 'text-rose-600'}\`}>
+                    <span className={`font-bold ${result.rating.includes('Healthy') ? 'text-emerald-600' : result.rating.includes('Moderate') ? 'text-amber-600' : 'text-rose-600'}`}>
                       {result.rating}
                     </span>
                   </div>
@@ -590,6 +457,7 @@ export default function DSOCalculator() {
   },
   {
     slug: 'direct-labor-multiplier',
+    category: 'Pricing & Billing',
     term: 'Direct Labor Multiplier',
     searchKeywords: ['direct labor multiplier formula', 'agency billing multiplier', 'labor markup factor', 'architect billing multiplier'],
     definition: 'The factor by which an employee’s base unburdened hourly wage is multiplied to establish their client billing rate.',
@@ -600,6 +468,7 @@ export default function DSOCalculator() {
   },
   {
     slug: 'agency-gross-margin',
+    category: 'Profitability & Margins',
     term: 'Agency Gross Margin',
     searchKeywords: ['agency gross margin benchmark', 'digital agency profit margin', 'services gross profit formula'],
     definition: 'Total client revenue minus all direct project labor and direct subcontractor costs, expressed as a percentage of revenue.',
@@ -657,6 +526,7 @@ async function sendDiscordNotification(term, newTool, indexingStatus) {
 
   const fields = [
     { name: "📖 Definition", value: term.definition },
+    { name: "🏷️ Category", value: term.category || "Profitability & Margins" },
     { name: "🔍 Target Search Intent", value: (term.searchKeywords || []).join(", ") || "Agency Glossary" },
     { name: "🔗 Glossary URL", value: `https://velotime.dg.tools/glossary/${term.slug}` }
   ];
@@ -744,6 +614,7 @@ async function run() {
   // 2. Append new glossary term to src/content/glossary.js
   const termEntry = {
     slug: nextItem.slug,
+    category: nextItem.category || 'Profitability & Margins',
     term: nextItem.term,
     definition: nextItem.definition,
     expanded: nextItem.expanded,
@@ -757,6 +628,7 @@ async function run() {
 
   const termEntryStr = `  ,\n  {\n` +
     `    slug: '${termEntry.slug}',\n` +
+    `    category: '${termEntry.category}',\n` +
     (termEntry.toolUrl ? `    toolUrl: '${termEntry.toolUrl}',\n    toolName: '${termEntry.toolName}',\n` : '') +
     `    term: '${termEntry.term}',\n` +
     `    definition: ${JSON.stringify(termEntry.definition)},\n` +
@@ -766,7 +638,7 @@ async function run() {
 
   content = content.replace(/\n\s*\];\s*\nexport function getGlossaryTerm/, termEntryStr + '\n\nexport function getGlossaryTerm');
   fs.writeFileSync(glossaryPath, content, 'utf8');
-  console.log(`✅ Appended "${nextItem.term}" to src/content/glossary.js`);
+  console.log(`✅ Appended "${nextItem.term}" with category "${termEntry.category}" to src/content/glossary.js`);
 
   // 3. Request Google Indexing for newly created URLs
   const urlsToIndex = [`https://velotime.dg.tools/glossary/${nextItem.slug}`];
@@ -781,6 +653,7 @@ async function run() {
 
   console.log("\n==========================================================");
   console.log(`🎉 Successfully published: "${nextItem.term}"`);
+  console.log(`🏷️ Category: ${termEntry.category}`);
   console.log(`🌐 Glossary URL: https://velotime.dg.tools/glossary/${nextItem.slug}`);
   if (createdTool) {
     console.log(`🛠️ Calculator URL: https://velotime.dg.tools/tools/${createdTool.slug}`);
