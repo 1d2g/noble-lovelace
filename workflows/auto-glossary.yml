@@ -1,0 +1,49 @@
+name: Autonomous Glossary & Calculator Engine
+
+on:
+  schedule:
+    # Runs twice a day: 08:00 UTC (4:00 AM EST) and 20:00 UTC (4:00 PM EST)
+    # Adds 1 term per run (max 2 terms per day)
+    - cron: '0 8,20 * * *'
+  workflow_dispatch: # Allows manual 1-click execution from GitHub Actions tab
+
+jobs:
+  publish-glossary-term:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Autonomous Glossary & Calculator Engine
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL || 'https://discordapp.com/api/webhooks/1536514054388977665/9OUlS5hP3fz2xyzE4QYi5OPCcDSU_HnnDCMEwH1OcQpxMR_L9JKuDCADsj4ClGnLUH1b' }}
+        run: node scripts/auto-glossary.js
+
+      - name: Build to Validate Static Pages & Sitemap
+        run: npm run build
+
+      - name: Commit and Push New Term & Calculators
+        run: |
+          git config --global user.name "VeloTime Glossary Bot"
+          git config --global user.email "bot@velotime.dg.tools"
+          git add src/content/glossary.js src/app/tools/
+          if git diff --staged --quiet; then
+            echo "No new terms or calculators to commit."
+          else
+            git commit -m "feat(glossary): auto-publish high-intent search term & interactive calculator"
+            git push origin main
+          fi
