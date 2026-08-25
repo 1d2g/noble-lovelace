@@ -435,7 +435,7 @@ export default function DSOCalculator() {
                     <span className="font-medium text-slate-800">\${result.dailySales}/day</span>
                   </div>
                   <div className="flex justify-between items-center text-sm pt-1">
-                    <span className="text-slate-600">Trapped Cash (>30 Days):</span>
+                    <span className="text-slate-600">{'Trapped Cash (>30 Days):'}</span>
                     <span className="font-bold text-rose-600 text-lg">\${result.trappedCash}</span>
                   </div>
                 </div>
@@ -636,9 +636,16 @@ async function run() {
     `    relatedTerms: ${JSON.stringify(termEntry.relatedTerms)}\n` +
     `  }\n];`;
 
-  content = content.replace(/\n\s*\];\s*\nexport function getGlossaryTerm/, termEntryStr + '\n\nexport function getGlossaryTerm');
+  // TARGET: Exactly the end of the `glossaryTerms` array (right before `export const glossaryCategories`)
+  const termsEndPattern = /\n\s*\];\s*\nexport const glossaryCategories/;
+
+  if (!termsEndPattern.test(content)) {
+    throw new Error("Could not find the end of glossaryTerms array in src/content/glossary.js");
+  }
+
+  content = content.replace(termsEndPattern, termEntryStr + '\n\nexport const glossaryCategories');
   fs.writeFileSync(glossaryPath, content, 'utf8');
-  console.log(`✅ Appended "${nextItem.term}" with category "${termEntry.category}" to src/content/glossary.js`);
+  console.log(`✅ Appended "${nextItem.term}" into glossaryTerms array in src/content/glossary.js`);
 
   // 3. Request Google Indexing for newly created URLs
   const urlsToIndex = [`https://velotime.dg.tools/glossary/${nextItem.slug}`];
