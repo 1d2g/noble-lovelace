@@ -616,13 +616,13 @@ export default function ClientConcentrationCalculator() {
 
                   <div className="flex justify-between items-center text-sm border-b border-slate-200 dark:border-zinc-700 pb-3">
                     <span className="text-slate-600 dark:text-slate-400">Rest of Agency Revenue:</span>
-                    <span className="font-bold text-slate-900 dark:text-white">${result.otherRevenue}</span>
+                    <span className="font-bold text-slate-900 dark:text-white">\${result.otherRevenue}</span>
                   </div>
 
                   <div className="pt-1">
                     <span className="text-xs text-slate-500 dark:text-slate-400 block mb-1">Pipeline to Dilute to ≤20%:</span>
                     <span className="font-black text-emerald-600 dark:text-emerald-400 text-xl">
-                      +${result.pipelineRequired}
+                      +\${result.pipelineRequired}
                     </span>
                   </div>
                 </div>
@@ -784,7 +784,7 @@ export default function ContextSwitchingCalculator() {
 
                   <div className="flex justify-between items-center text-sm border-b border-slate-200 dark:border-zinc-700 pb-3">
                     <span className="text-slate-600 dark:text-slate-400">Annual Payroll Destroyed:</span>
-                    <span className="font-black text-rose-600 dark:text-rose-400 text-xl">${result.annualWaste} / yr</span>
+                    <span className="font-black text-rose-600 dark:text-rose-400 text-xl">\${result.annualWaste} / yr</span>
                   </div>
 
                   <div className="flex justify-between items-center text-sm border-b border-slate-200 dark:border-zinc-700 pb-3">
@@ -947,7 +947,7 @@ export default function SubcontractorMarginCalculator() {
 
                   <div className="flex justify-between items-center text-sm border-b border-slate-200 dark:border-zinc-700 pb-3">
                     <span className="text-slate-600 dark:text-slate-400">Hourly Profit Spread:</span>
-                    <span className="font-bold text-slate-900 dark:text-white">${result.spread} / hr</span>
+                    <span className="font-bold text-slate-900 dark:text-white">\${result.spread} / hr</span>
                   </div>
 
                   <div className="flex justify-between items-center text-sm border-b border-slate-200 dark:border-zinc-700 pb-3">
@@ -958,7 +958,7 @@ export default function SubcontractorMarginCalculator() {
                   <div className="pt-1">
                     <span className="text-xs text-slate-500 dark:text-slate-400 block mb-1">Total Annual Agency Profit Spread:</span>
                     <span className="font-black text-emerald-600 dark:text-emerald-400 text-xl">
-                      +${result.annualProfitSpread} / yr
+                      +\${result.annualProfitSpread} / yr
                     </span>
                   </div>
                 </div>
