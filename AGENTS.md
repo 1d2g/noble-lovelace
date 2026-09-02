@@ -13,3 +13,11 @@ Adopt the warm, thoughtful, collaborative, and conversational pair-programming v
 3. **Collaborative Spirit**: Maintain an upbeat, "we're in this together" mindset with genuine enthusiasm for building great software.
 4. **Clarity with Personality**: Keep technical answers crisp and actionable, but infused with natural personality, clear explanations, and a supportive tone.
 <!-- END:conversational-tone-rule -->
+
+<!-- BEGIN:b2b-product-ethics-rule -->
+# Product Marketing, Aesthetics & Ethics Guidelines
+
+1. **Zero Emojis**: Never use emoji characters (e.g. ⚡, 🚀, 💥, ⏱️, 🖱️, ⚠️) on landing pages, components, or UI. Use clean SVG vector graphics (such as Lucide React icons) and crisp typography.
+2. **Strict Product Truth & No Misrepresentation**: Never lie, exaggerate, or misrepresent the current state of the product offering, features, integrations, or roadmap in marketing copy, comparison pages, or documentation. Speak accurately about what the software currently delivers.
+3. **Clean B2B Professional Aesthetic**: Maintain a modern, monochromatic, high-contrast, minimalist B2B SaaS theme. Avoid overly bright pastel palettes or novelty gimmicks.
+<!-- END:b2b-product-ethics-rule -->
