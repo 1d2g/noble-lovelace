@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { 
   ArrowUpRight, 
+  ArrowRight,
   Clock, 
   ShieldCheck, 
   Cpu, 
@@ -13,7 +14,6 @@ import {
   Zap,
   Grid
 } from 'lucide-react';
-import DailyKerningGame from './components/DailyKerningGame';
 import DesignUtilities from './components/DesignUtilities';
 
 export default function Home() {
@@ -266,8 +266,166 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Daily Challenge Component */}
-      <DailyKerningGame />
+      {/* Daily Games Section */}
+      <section id="daily-games" style={{ marginTop: '5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+          <div>
+            <span className="mono-label" style={{ color: '#10b981', fontWeight: 700 }}>Daily Micro-Challenges</span>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '0.2rem' }}>
+              Daily Designer Games
+            </h2>
+          </div>
+
+          <Link
+            href="/games"
+            style={{
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              color: 'var(--text-secondary)',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem'
+            }}
+          >
+            <span>All Daily Games</span>
+            <ArrowRight size={14} />
+          </Link>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+          {/* Featured Game: Logo Balance */}
+          <div 
+            className="hub-card" 
+            style={{ 
+              padding: '2rem', 
+              backgroundColor: '#101014',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                <span className="mono-label" style={{ color: '#10b981', fontWeight: 700 }}>Featured Challenge</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>•</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Live on /games/logo-balance</span>
+              </div>
+
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '0.5rem' }}>
+                Logo Balance
+              </h3>
+
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1.5rem' }}>
+                Can you eyeball the optical balance of iconic logos? Adjust the Google &ldquo;G&rdquo; crossbar, Mastercard overlapping spheres, Target bullseye stroke ratio, and Spotify wave angles.
+              </p>
+
+              {/* Mini visual teaser */}
+              <div style={{ backgroundColor: '#000000', borderRadius: '8px', border: '1px solid var(--border-subtle)', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', marginBottom: '1.5rem' }}>
+                {/* Mini Google G snippet */}
+                <svg viewBox="-50 -50 100 100" width="48" height="48">
+                  <path d="M 34 -34 A 48 48 0 0 0 -34 -34 L -24 -24 A 34 34 0 0 1 24 -24 Z" fill="#EA4335" />
+                  <path d="M -34 -34 A 48 48 0 0 0 -34 34 L -24 24 A 34 34 0 0 1 -24 -24 Z" fill="#FBBC05" />
+                  <path d="M -34 34 A 48 48 0 0 0 34 34 L 24 24 A 34 34 0 0 1 -24 24 Z" fill="#34A853" />
+                  <path d="M 34 34 A 48 48 0 0 0 48 0 L 48 3 L 0 3 L 0 -12 L 34 -12 A 34 34 0 0 1 24 24 Z" fill="#4285F4" />
+                </svg>
+
+                {/* Mini Mastercard spheres snippet */}
+                <svg viewBox="-40 -25 80 50" width="60" height="38">
+                  <circle cx="-16" cy="0" r="20" fill="#EB001B" />
+                  <circle cx="16" cy="0" r="20" fill="#F79E1B" />
+                  <clipPath id="miniClip">
+                    <circle cx="-16" cy="0" r="20" />
+                  </clipPath>
+                  <circle cx="16" cy="0" r="20" fill="#FF5F00" clipPath="url(#miniClip)" />
+                </svg>
+              </div>
+            </div>
+
+            <Link
+              href="/games/logo-balance"
+              style={{
+                backgroundColor: '#f4f4f5',
+                color: '#09090b',
+                fontSize: '0.875rem',
+                fontWeight: 800,
+                padding: '0.75rem 1.5rem',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.4rem',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <span>Play Logo Balance</span>
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+
+          {/* Game 2: The Games Hub */}
+          <div 
+            className="hub-card" 
+            style={{ 
+              padding: '2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                <span className="mono-label" style={{ color: '#3b82f6', fontWeight: 700 }}>Micro-Challenges</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>•</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Dedicated Portal</span>
+              </div>
+
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '0.5rem' }}>
+                Designer Games Portal
+              </h3>
+
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.5, marginBottom: '1.25rem' }}>
+                A dedicated, distraction-free environment for quick 60-second daily challenges between creative sprints:
+              </p>
+
+              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.825rem', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <CheckCircle size={14} style={{ color: '#10b981' }} />
+                  <span><strong>Logo Balance:</strong> Eyeball optical brand geometry</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <CheckCircle size={14} style={{ color: '#10b981' }} />
+                  <span><strong>Daily Kerning:</strong> Balance tricky letter pairings</span>
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <CheckCircle size={14} style={{ color: '#f59e0b' }} />
+                  <span><strong>Hex Match:</strong> Daily color palette guesser (Coming Soon)</span>
+                </li>
+              </ul>
+            </div>
+
+            <Link
+              href="/games"
+              style={{
+                backgroundColor: 'var(--bg-card-muted)',
+                color: 'var(--text-primary)',
+                fontSize: '0.875rem',
+                fontWeight: 700,
+                padding: '0.75rem 1.5rem',
+                borderRadius: '6px',
+                border: '1px solid var(--border-subtle)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.4rem',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              <span>Open Games Portal</span>
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Studio Utilities Component */}
       <DesignUtilities />

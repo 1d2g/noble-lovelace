@@ -15,15 +15,18 @@ export default function Navigation() {
       </div>
 
       <div className="nav-links">
-        <a href="#products" className="nav-link">
+        <Link href="/#products" className="nav-link">
           Products
-        </a>
-        <a href="#daily-game" className="nav-link">
-          Daily Kerning
-        </a>
-        <a href="#utilities" className="nav-link">
+        </Link>
+        <Link href="/games/logo-balance" className="nav-link">
+          Logo Balance
+        </Link>
+        <Link href="/games" className="nav-link">
+          All Games
+        </Link>
+        <Link href="/#utilities" className="nav-link">
           Utilities
-        </a>
+        </Link>
         <a 
           href="https://velotime.dg.tools/tools" 
           target="_blank" 
