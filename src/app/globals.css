@@ -1,11 +1,17 @@
 :root {
-  --bg-main: #ffffff;
-  --bg-card: #f8fafc;
-  --bg-card-hover: #f1f5f9;
-  --border-color: #cbd5e1;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --accent: #2563eb;
+  --bg-page: #09090b;
+  --bg-card: #121216;
+  --bg-card-hover: #18181f;
+  --bg-card-muted: #1c1c24;
+  --border-subtle: #27272a;
+  --border-hover: #3f3f46;
+  --border-bright: #52525b;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --accent-blue: #3b82f6;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
 }
 
 * {
@@ -18,10 +24,12 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: var(--bg-main);
+  background-color: var(--bg-page);
   color: var(--text-primary);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -29,66 +37,137 @@ a {
   text-decoration: none;
 }
 
+/* Header & Nav */
 .nav-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 1rem 2rem;
-  background-color: var(--bg-main);
-  border-bottom: 1px solid var(--border-color);
+  background-color: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .nav-logo {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-right: 2rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: var(--bg-card-muted);
+  color: var(--text-secondary);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
 }
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
 }
 
 .nav-link {
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  transition: color 0.2s ease;
+  transition: color 0.15s ease;
 }
 
-.nav-link:hover, .nav-link[data-active="true"] {
+.nav-link:hover,
+.nav-link[data-active="true"] {
   color: var(--text-primary);
 }
 
+.nav-cta {
+  background-color: #f4f4f5;
+  color: #09090b !important;
+  font-size: 0.825rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-cta:hover {
+  background-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Page Layout */
 .page-container {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 3rem 1.5rem 6rem;
+  max-width: 1140px;
   margin: 0 auto;
 }
 
-.card {
+/* Typography utilities */
+.mono-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.725rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Common Card Styles */
+.hub-card {
   background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
-  padding: 1.5rem;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  border: 1px solid transparent;
+  padding: 1.75rem;
+  transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.card:hover {
+.hub-card:hover {
+  border-color: var(--border-hover);
   background-color: var(--bg-card-hover);
+}
+
+/* Interactive Sliders & Inputs */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: var(--bg-card-muted);
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--text-primary);
   cursor: pointer;
+  border: 2px solid #09090b;
+  transition: transform 0.1s ease;
 }
 
-.card-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.card-desc {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
 }

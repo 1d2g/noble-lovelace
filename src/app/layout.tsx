@@ -1,29 +1,29 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Navigation from './components/Navigation'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Navigation from './components/Navigation';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dg.tools'),
   alternates: {
     canonical: '/',
   },
-  title: 'dg.tools | Flat-Rate Time Tracking for Small Teams',
-  description: 'Simple, offline-first time tracking with zero per-seat fees. $9/month flat.',
+  title: 'dg.tools | Independent Software Foundry by Dustin Gray',
+  description: 'Independent software tools, autonomous developer agents, and daily creative experiments built with obsessive craft. Home of VeloTime, UX Auditor Agent, and daily creative challenges.',
   openGraph: {
-    title: 'VeloTime by dg.tools',
-    description: 'Flat-rate time tracking software for freelancers and small teams.',
+    title: 'dg.tools | Software Foundry by Dustin Gray',
+    description: 'Independent software tools, autonomous developer agents, and daily creative experiments built with obsessive craft.',
     url: 'https://dg.tools',
     siteName: 'dg.tools',
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -32,5 +32,5 @@ export default function RootLayout({
         <main className="page-container">{children}</main>
       </body>
     </html>
-  )
+  );
 }

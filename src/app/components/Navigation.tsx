@@ -1,29 +1,47 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { ArrowUpRight, Terminal } from 'lucide-react';
 
 export default function Navigation() {
-  const pathname = usePathname();
-
   return (
     <nav className="nav-container">
-      <Link href="/" className="nav-logo">
-        dg.tools
-      </Link>
-      <div className="nav-links">
-        <Link 
-          href="/" 
-          className="nav-link"
-          data-active={pathname === '/'}
-        >
-          VeloTime Demo
+      <div className="nav-left">
+        <Link href="/" className="nav-logo">
+          <Terminal size={18} className="text-zinc-400" />
+          <span>dg.tools</span>
         </Link>
+        <span className="nav-badge">Foundry</span>
+      </div>
+
+      <div className="nav-links">
+        <a href="#products" className="nav-link">
+          Products
+        </a>
+        <a href="#daily-game" className="nav-link">
+          Daily Kerning
+        </a>
+        <a href="#utilities" className="nav-link">
+          Utilities
+        </a>
+        <a 
+          href="https://velotime.dg.tools/tools" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="nav-link"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}
+        >
+          <span>Agency Operations</span>
+          <ArrowUpRight size={13} style={{ opacity: 0.7 }} />
+        </a>
         <a 
           href="https://velotime.dg.tools" 
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-lg font-bold text-sm shadow-sm transition-colors ml-4"
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="nav-cta"
         >
-          Log In to App
+          <span>VeloTime</span>
+          <ArrowUpRight size={13} />
         </a>
       </div>
     </nav>
