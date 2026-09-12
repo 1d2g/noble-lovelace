@@ -1,12 +1,16 @@
 export const TOTAL_DAYS = 100;
 
-// Anchor epoch: September 12, 2026 = Day 1
-export const ANCHOR_EPOCH = new Date('2026-09-12T00:00:00Z').getTime();
+// Anchor date in local calendar: September 12, 2026 = Day 1
+export const ANCHOR_YEAR = 2026;
+export const ANCHOR_MONTH = 8; // Month 8 = September (0-indexed in JS Date)
+export const ANCHOR_DATE = 12;
 
 export function getCurrentDayNumber(): number {
-  const now = Date.now();
-  const diff = now - ANCHOR_EPOCH;
-  const day = Math.floor(diff / (1000 * 60 * 60 * 24)) + 1;
+  const now = new Date();
+  const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const anchorMidnight = new Date(ANCHOR_YEAR, ANCHOR_MONTH, ANCHOR_DATE).getTime();
+  const diffDays = Math.floor((todayMidnight - anchorMidnight) / (1000 * 60 * 60 * 24));
+  const day = diffDays + 1;
   return Math.max(1, Math.min(TOTAL_DAYS, day));
 }
 
@@ -16,8 +20,8 @@ export function isDayUnlocked(dayNumber: number): boolean {
 }
 
 export function getDayDateString(dayNumber: number): string {
-  const targetTime = ANCHOR_EPOCH + (dayNumber - 1) * (1000 * 60 * 60 * 24);
-  const d = new Date(targetTime);
+  const d = new Date(ANCHOR_YEAR, ANCHOR_MONTH, ANCHOR_DATE);
+  d.setDate(d.getDate() + (dayNumber - 1));
   return d.toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',

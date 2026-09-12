@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Sliders, Type, Palette, Sparkles, ArrowLeft, ArrowUpRight } from 'lucide-react';
+import GameSidebarAds from '../components/GameSidebarAds';
 
 export const metadata: Metadata = {
   title: 'Daily Designer Games & Micro-Challenges | dg.tools',
@@ -44,25 +45,28 @@ export default function GamesHubPage() {
   ];
 
   return (
-    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '1rem 0 6rem 0' }}>
-      {/* Top backlink */}
-      <div style={{ marginBottom: '2rem' }}>
-        <Link 
-          href="/"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.35rem',
-            color: 'var(--text-secondary)',
-            fontSize: '0.825rem',
-            fontWeight: 500,
-            transition: 'color 0.15s ease'
-          }}
-        >
-          <ArrowLeft size={14} />
-          <span>dg.tools Hub</span>
-        </Link>
-      </div>
+    <div style={{ maxWidth: '1180px', margin: '0 auto', padding: '1.5rem 0 6rem 0' }}>
+      <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'flex-start', justifyContent: 'center', flexWrap: 'wrap' }}>
+        {/* Main Games Column */}
+        <div style={{ flex: '1 1 720px', maxWidth: '820px', minWidth: '320px' }}>
+          {/* Top backlink */}
+          <div style={{ marginBottom: '2rem' }}>
+            <Link 
+              href="/"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                color: 'var(--text-secondary)',
+                fontSize: '0.825rem',
+                fontWeight: 500,
+                transition: 'color 0.15s ease'
+              }}
+            >
+              <ArrowLeft size={14} />
+              <span>dg.tools Hub</span>
+            </Link>
+          </div>
 
       <header style={{ marginBottom: '3rem' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)', padding: '0.35rem 0.75rem', borderRadius: '9999px', marginBottom: '1rem' }}>
@@ -206,5 +210,12 @@ export default function GamesHubPage() {
         </a>
       </div>
     </div>
-  );
+
+    {/* Responsive Side Ads Column */}
+    <div style={{ flex: '0 0 290px', width: '290px', position: 'sticky', top: '5rem' }}>
+      <GameSidebarAds />
+    </div>
+  </div>
+</div>
+);
 }

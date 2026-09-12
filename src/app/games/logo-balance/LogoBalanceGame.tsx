@@ -34,6 +34,7 @@ import {
   getPlayedDaysList 
 } from './dailyEngine';
 import { renderChallengeSvg } from './archetypes';
+import GameSidebarAds from '../../components/GameSidebarAds';
 
 export default function LogoBalanceGame() {
   const currentSystemDay = getCurrentDayNumber();
@@ -217,7 +218,10 @@ export default function LogoBalanceGame() {
   const playedDays = getPlayedDaysList();
 
   return (
-    <div style={{ maxWidth: '860px', margin: '0 auto', padding: '1rem 0 5rem 0' }}>
+    <div style={{ maxWidth: '1180px', margin: '0 auto', padding: '1rem 0 5rem 0' }}>
+      <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'flex-start', justifyContent: 'center', flexWrap: 'wrap' }}>
+        {/* Main Game Stage */}
+        <div style={{ flex: '1 1 720px', maxWidth: '820px', minWidth: '320px' }}>
       {/* Top Header & Day Navigation */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -1021,5 +1025,12 @@ export default function LogoBalanceGame() {
         </a>
       </div>
     </div>
-  );
+
+    {/* Responsive Side Ads Column */}
+    <div style={{ flex: '0 0 290px', width: '290px', position: 'sticky', top: '5rem' }}>
+      <GameSidebarAds />
+    </div>
+  </div>
+</div>
+);
 }
