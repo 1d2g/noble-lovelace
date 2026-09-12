@@ -83,20 +83,9 @@ const CHALLENGES: LogoChallenge[] = [
     type: 'multi',
     id: 'google-g',
     brandName: 'Google "G" Color Seams',
-    taskPrompt: 'Adjust the 4 color transition lines where Red, Yellow, Green, and Blue meet around the circle.',
-    designerInsight: 'Google’s 2015 brand redesign purposefully engineered non-symmetrical color transitions. Red meets Yellow in the top-left at 140° to give Red a dominant, welcoming header arch. Yellow meets Green at 218° to keep the warm tones balanced against the cool bottom. Green meets Blue at 315°, and Blue extends upward until 44° where it meets Red above the crossbar.',
+    taskPrompt: 'Adjust the 3 color transition lines where Red meets Yellow, Yellow meets Green, and Green meets Blue.',
+    designerInsight: 'Google’s 2015 brand redesign purposefully engineered an open letterform with a distinctive negative-space mouth above the horizontal crossbar. The color boundaries are optically balanced: Red meets Yellow in the top-left at 140° for a welcoming header arch, Yellow meets Green at 218° to balance warm and cool tones, and Green meets Blue at 315° where the lower curve sweeps into the crossbar.',
     parameters: [
-      {
-        id: 'redBlue',
-        label: 'Red / Blue Seam (Top-Right)',
-        colorA: '#EA4335',
-        colorB: '#4285F4',
-        min: 24,
-        max: 64,
-        step: 1,
-        targetValue: 44,
-        tolerance: 20
-      },
       {
         id: 'redYellow',
         label: 'Red / Yellow Seam (Top-Left)',
@@ -125,25 +114,36 @@ const CHALLENGES: LogoChallenge[] = [
         colorA: '#34A853',
         colorB: '#4285F4',
         min: 290,
-        max: 340,
+        max: 335,
         step: 1,
         targetValue: 315,
         tolerance: 25
       }
     ],
     renderLogo: (values, showOfficial) => {
-      const aRedBlue = showOfficial ? 44 : values['redBlue'];
       const aRedYellow = showOfficial ? 140 : values['redYellow'];
       const aYellowGreen = showOfficial ? 218 : values['yellowGreen'];
       const aGreenBlue = showOfficial ? 315 : values['greenBlue'];
 
       const rIn = 52;
       const rOut = 96;
+      const barTop = -22;
+      const barBottom = 22;
 
-      const pathRed = arcPath(aRedBlue, aRedYellow, rIn, rOut);
+      // Authentic Google G gap: Red ends at 44 degrees on top-right
+      const fixedRedStart = 44;
+
+      const pathRed = arcPath(fixedRedStart, aRedYellow, rIn, rOut);
       const pathYellow = arcPath(aRedYellow, aYellowGreen, rIn, rOut);
       const pathGreen = arcPath(aYellowGreen, aGreenBlue, rIn, rOut);
-      const pathBlueArc = arcPath(aGreenBlue, aRedBlue, rIn, rOut);
+
+      // Blue covers from Green seam up to the horizontal crossbar (with open gap above barTop)
+      const xBarTopOut = Math.round(Math.sqrt(rOut * rOut - barTop * barTop) * 10) / 10;
+      const xBarBottomIn = Math.round(Math.sqrt(rIn * rIn - barBottom * barBottom) * 10) / 10;
+      const [xGOut, yGOut] = pt(aGreenBlue, rOut);
+      const [xGIn, yGIn] = pt(aGreenBlue, rIn);
+
+      const pathBlue = `M ${xGOut} ${yGOut} A ${rOut} ${rOut} 0 0 0 ${xBarTopOut} ${barTop} L 0 ${barTop} L 0 ${barBottom} L ${xBarBottomIn} ${barBottom} A ${rIn} ${rIn} 0 0 1 ${xGIn} ${yGIn} Z`;
 
       // Line endpoints for seam indicators
       const seamLine = (deg: number, color: string) => {
@@ -170,7 +170,7 @@ const CHALLENGES: LogoChallenge[] = [
             </clipPath>
           </defs>
 
-          {/* Color Ring Arcs */}
+          {/* Color Ring Arcs with Open Mouth Gap */}
           <g clipPath="url(#googleOuterCircle)">
             {/* Red Arc */}
             <path d={pathRed} fill="#EA4335" />
@@ -178,15 +178,11 @@ const CHALLENGES: LogoChallenge[] = [
             <path d={pathYellow} fill="#FBBC05" />
             {/* Green Arc */}
             <path d={pathGreen} fill="#34A853" />
-            {/* Blue Arc */}
-            <path d={pathBlueArc} fill="#4285F4" />
-
-            {/* Blue Horizontal Crossbar extending to center */}
-            <rect x="0" y="-22" width="96" height="44" fill="#4285F4" />
+            {/* Blue Arc & Crossbar (Leaves open gap above crossbar) */}
+            <path d={pathBlue} fill="#4285F4" />
           </g>
 
-          {/* Seam Indicator Lines */}
-          {seamLine(aRedBlue, '#ffffff')}
+          {/* 3 Active Seam Indicator Lines */}
           {seamLine(aRedYellow, '#ffffff')}
           {seamLine(aYellowGreen, '#ffffff')}
           {seamLine(aGreenBlue, '#ffffff')}
@@ -194,7 +190,6 @@ const CHALLENGES: LogoChallenge[] = [
           {/* Official Spec Reference Radial Lines */}
           {showOfficial && (
             <>
-              {seamLine(44, '#10B981')}
               {seamLine(140, '#10B981')}
               {seamLine(218, '#10B981')}
               {seamLine(315, '#10B981')}
