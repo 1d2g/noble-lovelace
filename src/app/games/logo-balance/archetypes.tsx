@@ -139,12 +139,12 @@ export function renderChallengeSvg(
     case 'intersecting-rings': {
       // Mastercard / Overlapping Spheres
       const dist = getVal('overlapDistance');
-      const radius = 64;
+      const radius = 100;
       const x1 = -dist / 2;
       const x2 = dist / 2;
 
       return (
-        <svg viewBox="-140 -80 280 160" width="280" height="160">
+        <svg viewBox="-180 -120 360 240" width="280" height="180">
           <defs>
             <clipPath id="archetypeLensClip">
               <circle cx={x1} cy="0" r={radius} />
@@ -155,8 +155,8 @@ export function renderChallengeSvg(
           <circle cx={x2} cy="0" r={radius} fill="#FF5F00" clipPath="url(#archetypeLensClip)" />
           {showOfficial && (
             <>
-              <line x1={-62} y1="-75" x2={-62} y2="75" stroke="#10B981" strokeWidth="1.5" strokeDasharray="3 3" />
-              <line x1={62} y1="-75" x2={62} y2="75" stroke="#10B981" strokeWidth="1.5" strokeDasharray="3 3" />
+              <line x1={-62} y1="-105" x2={-62} y2="105" stroke="#10B981" strokeWidth="2" strokeDasharray="4 4" />
+              <line x1={62} y1="-105" x2={62} y2="105" stroke="#10B981" strokeWidth="2" strokeDasharray="4 4" />
             </>
           )}
         </svg>

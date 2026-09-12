@@ -67,11 +67,11 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
             label: 'Red / Yellow Seam (Top-Left)',
             colorA: '#EA4335',
             colorB: '#FBBC05',
-            min: 115,
-            max: 165,
+            min: 95,
+            max: 185,
             step: 1,
             targetValue: 140,
-            tolerance: 25,
+            tolerance: 30,
             unit: '°'
           },
           {
@@ -79,11 +79,11 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
             label: 'Yellow / Green Seam (Bottom-Left)',
             colorA: '#FBBC05',
             colorB: '#34A853',
-            min: 195,
-            max: 245,
+            min: 175,
+            max: 265,
             step: 1,
             targetValue: 218,
-            tolerance: 25,
+            tolerance: 30,
             unit: '°'
           },
           {
@@ -91,11 +91,11 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
             label: 'Green / Blue Seam (Bottom-Right)',
             colorA: '#34A853',
             colorB: '#4285F4',
-            min: 290,
-            max: 335,
+            min: 270,
+            max: 360,
             step: 1,
             targetValue: 315,
-            tolerance: 25,
+            tolerance: 30,
             unit: '°'
           }
         ]
@@ -115,7 +115,7 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
             max: 45,
             step: 1,
             targetValue: 0,
-            tolerance: 25,
+            tolerance: 20,
             unit: '°'
           }
         ]
@@ -134,11 +134,11 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
       {
         id: 'overlapDistance',
         label: 'Sphere Center-to-Center Spacing',
-        min: 80,
-        max: 170,
+        min: 60,
+        max: 190,
         step: 1,
         targetValue: 124,
-        tolerance: 50,
+        tolerance: 35,
         unit: 'px'
       }
     ]
@@ -157,11 +157,11 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
       {
         id: 'strokeRatio',
         label: 'White Ring Band Width',
-        min: 15,
-        max: 65,
+        min: 10,
+        max: 60,
         step: 1,
         targetValue: 33,
-        tolerance: 30,
+        tolerance: 15,
         unit: '%'
       }
     ]
@@ -181,10 +181,10 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
         id: 'tiltAngle',
         label: 'Counter-Clockwise Rotation',
         min: 0,
-        max: 38,
+        max: 35,
         step: 0.5,
         targetValue: 16.5,
-        tolerance: 20,
+        tolerance: 10,
         unit: '°'
       }
     ]
@@ -203,11 +203,11 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
       {
         id: 'apexHeight',
         label: 'Arch Apex Elevation',
-        min: 30,
+        min: 25,
         max: 95,
         step: 1,
         targetValue: 62,
-        tolerance: 35,
+        tolerance: 20,
         unit: 'px'
       }
     ]
@@ -226,11 +226,11 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
       {
         id: 'gapWidth',
         label: 'Negative Space Clearance',
-        min: -25,
-        max: 35,
+        min: -30,
+        max: 30,
         step: 1,
         targetValue: 0,
-        tolerance: 25,
+        tolerance: 15,
         unit: 'px'
       }
     ]

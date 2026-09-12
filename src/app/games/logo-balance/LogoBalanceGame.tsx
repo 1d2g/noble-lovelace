@@ -549,6 +549,12 @@ export default function LogoBalanceGame() {
                       +
                     </button>
                   </div>
+
+                  {/* Scale Extrema Range Readout */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '0.35rem', padding: '0 2.75rem' }}>
+                    <span>{param.min}{param.unit} (Min)</span>
+                    <span>{param.max}{param.unit} (Max)</span>
+                  </div>
                 </div>
               );
             })}
