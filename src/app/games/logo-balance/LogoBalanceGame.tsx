@@ -1000,7 +1000,7 @@ export default function LogoBalanceGame() {
         </div>
 
         <a
-          href="https://velotime.dg.tools"
+          href="https://velotime.dg.tools/demo"
           target="_blank"
           rel="noopener noreferrer"
           style={{

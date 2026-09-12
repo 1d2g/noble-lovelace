@@ -114,9 +114,9 @@ export default function Home() {
                 </div>
               </div>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}>
                 <a 
-                  href="https://velotime.dg.tools" 
+                  href="https://velotime.dg.tools/demo" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   style={{
@@ -133,8 +133,29 @@ export default function Home() {
                     boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
                   }}
                 >
-                  <span>Launch VeloTime</span>
+                  <span>Try Interactive Demo</span>
                   <ArrowUpRight size={16} />
+                </a>
+
+                <a 
+                  href="https://velotime.dg.tools" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{
+                    backgroundColor: 'var(--bg-card)',
+                    color: 'var(--text-primary)',
+                    fontWeight: 700,
+                    fontSize: '0.85rem',
+                    padding: '0.75rem 1.25rem',
+                    borderRadius: '6px',
+                    border: '1px solid var(--border-subtle)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    transition: 'all 0.15s ease'
+                  }}
+                >
+                  <span>App &amp; Pricing</span>
                 </a>
 
                 <a 
@@ -143,15 +164,16 @@ export default function Home() {
                   rel="noopener noreferrer"
                   style={{
                     color: 'var(--text-secondary)',
-                    fontSize: '0.85rem',
+                    fontSize: '0.825rem',
                     fontWeight: 600,
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.3rem'
+                    gap: '0.25rem',
+                    marginLeft: '0.25rem'
                   }}
                 >
-                  <span>Explore Agency Operations Suite (18 Calculators)</span>
-                  <ExternalLink size={13} />
+                  <span>Agency Operations (18 Calculators)</span>
+                  <ExternalLink size={12} />
                 </a>
               </div>
             </div>

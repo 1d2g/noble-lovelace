@@ -185,7 +185,7 @@ export default function GamesHubPage() {
         </div>
 
         <a
-          href="https://velotime.dg.tools"
+          href="https://velotime.dg.tools/demo"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -201,7 +201,7 @@ export default function GamesHubPage() {
             boxShadow: '0 4px 12px rgba(15, 23, 42, 0.12)'
           }}
         >
-          <span>Explore VeloTime</span>
+          <span>Try 10-Sec Demo</span>
           <ArrowUpRight size={14} />
         </a>
       </div>

@@ -28,6 +28,16 @@ export default function Navigation() {
           Utilities
         </Link>
         <a 
+          href="https://velotime.dg.tools/demo" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="nav-link"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', color: 'var(--text-primary)', fontWeight: 700 }}
+        >
+          <span>VeloTime Demo</span>
+          <ArrowUpRight size={13} style={{ opacity: 0.7 }} />
+        </a>
+        <a 
           href="https://velotime.dg.tools/tools" 
           target="_blank" 
           rel="noopener noreferrer" 
@@ -43,7 +53,7 @@ export default function Navigation() {
           rel="noopener noreferrer" 
           className="nav-cta"
         >
-          <span>VeloTime</span>
+          <span>VeloTime App</span>
           <ArrowUpRight size={13} />
         </a>
       </div>
