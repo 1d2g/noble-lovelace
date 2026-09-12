@@ -128,7 +128,8 @@ export default function LogoBalanceGame() {
   const handleNudge = (param: SliderParam, delta: number) => {
     if (isCurrentChecked) return;
     const cur = currentValues[param.id] ?? param.targetValue;
-    const next = Math.min(param.max, Math.max(param.min, cur + delta));
+    const precision = param.step <= 0.1 ? 10 : param.step <= 0.5 ? 2 : 1;
+    const next = Math.min(param.max, Math.max(param.min, Math.round((cur + delta) * precision) / precision));
     handleSliderChange(param.id, next);
   };
 
@@ -492,7 +493,7 @@ export default function LogoBalanceGame() {
                         </span>
                       )}
                       <span style={{ fontSize: '0.85rem', fontWeight: 800, fontFamily: 'monospace', color: 'var(--text-primary)' }}>
-                        {currentVal}{param.unit}
+                        {Number(currentVal).toFixed(param.step <= 0.1 ? 1 : 0)}{param.unit}
                       </span>
                     </div>
                   </div>
@@ -650,8 +651,8 @@ export default function LogoBalanceGame() {
 
               {activeChallenge.parameters.length === 1 && (
                 <div style={{ textAlign: 'right', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                  <div>Target: <strong style={{ color: 'var(--text-primary)' }}>{activeChallenge.parameters[0].targetValue}{activeChallenge.parameters[0].unit}</strong></div>
-                  <div>Your guess: <strong style={{ color: 'var(--text-primary)' }}>{currentValues[activeChallenge.parameters[0].id] ?? 0}{activeChallenge.parameters[0].unit}</strong></div>
+                  <div>Target: <strong style={{ color: 'var(--text-primary)' }}>{Number(activeChallenge.parameters[0].targetValue).toFixed(activeChallenge.parameters[0].step <= 0.1 ? 1 : 0)}{activeChallenge.parameters[0].unit}</strong></div>
+                  <div>Your guess: <strong style={{ color: 'var(--text-primary)' }}>{Number(currentValues[activeChallenge.parameters[0].id] ?? 0).toFixed(activeChallenge.parameters[0].step <= 0.1 ? 1 : 0)}{activeChallenge.parameters[0].unit}</strong></div>
                 </div>
               )}
             </div>

@@ -197,17 +197,17 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
     dayNumber,
     archetypeId: 'apex-curve',
     brandName: apexBrand.name,
-    taskPrompt: apexBrand.prompt,
-    designerInsight: apexBrand.insight,
+    taskPrompt: 'Adjust the center join apex elevation between the twin Golden Arches to match the authentic parabolic curve.',
+    designerInsight: 'Stanley Clark Meston originally designed the Golden Arches in 1953 as 25-foot structural arches. Jim Schindler formalized them into the "M" emblem in 1962, balancing the parabolic curve drop from the arch peaks to the central join at an exact 81.5px optical elevation.',
     parameters: [
       {
         id: 'apexHeight',
-        label: 'Arch Apex Elevation',
-        min: 25,
-        max: 95,
-        step: 1,
-        targetValue: 62,
-        tolerance: 20,
+        label: 'Arch Apex Join Drop',
+        min: 45,
+        max: 120,
+        step: 0.5,
+        targetValue: 81.5,
+        tolerance: 18,
         unit: 'px'
       }
     ]
@@ -220,17 +220,17 @@ export function getChallengesForDay(dayNumber: number): DayChallenge[] {
     dayNumber,
     archetypeId: 'negative-gap',
     brandName: gapBrand.name,
-    taskPrompt: gapBrand.prompt,
-    designerInsight: gapBrand.insight,
+    taskPrompt: 'Adjust the horizontal tracking of the lowercase "x" to form the iconic hidden forward arrow in the negative space.',
+    designerInsight: 'Lindon Leader’s 1994 FedEx identity is one of the most celebrated marks in graphic design history. By optically kerning the custom Univers/Futura hybrid "E" and lowercase "x" until they touch at exactly 0.0px clearance, a crisp, unmistakable forward-pointing arrow is revealed in the negative space between them.',
     parameters: [
       {
         id: 'gapWidth',
-        label: 'Negative Space Clearance',
-        min: -30,
-        max: 30,
-        step: 1,
+        label: 'Letter "x" Horizontal Clearance',
+        min: -4,
+        max: 4,
+        step: 0.1,
         targetValue: 0,
-        tolerance: 15,
+        tolerance: 1.5,
         unit: 'px'
       }
     ]
