@@ -16,7 +16,31 @@ import {
   Check
 } from 'lucide-react';
 
-interface LogoChallenge {
+function degToRad(deg: number) { 
+  return (deg * Math.PI) / 180; 
+}
+
+function pt(deg: number, r: number): [number, number] {
+  const rad = degToRad(deg);
+  return [
+    Math.round(r * Math.cos(rad) * 10) / 10, 
+    Math.round(-r * Math.sin(rad) * 10) / 10
+  ];
+}
+
+function arcPath(a1: number, a2: number, rIn: number, rOut: number): string {
+  let delta = (a2 - a1) % 360;
+  if (delta < 0) delta += 360;
+  const large = delta > 180 ? 1 : 0;
+  const [x1, y1] = pt(a1, rOut);
+  const [x2, y2] = pt(a2, rOut);
+  const [x3, y3] = pt(a2, rIn);
+  const [x4, y4] = pt(a1, rIn);
+  return `M ${x1} ${y1} A ${rOut} ${rOut} 0 ${large} 0 ${x2} ${y2} L ${x3} ${y3} A ${rIn} ${rIn} 0 ${large} 1 ${x4} ${y4} Z`;
+}
+
+interface SingleSliderChallenge {
+  type: 'single';
   id: string;
   brandName: string;
   taskPrompt: string;
@@ -25,67 +49,163 @@ interface LogoChallenge {
   max: number;
   step: number;
   targetValue: number;
-  tolerance: number; // For 100% calculation
+  tolerance: number;
   unit: string;
   renderLogo: (value: number, showOfficial: boolean) => React.ReactNode;
 }
 
+interface MultiSliderParameter {
+  id: string;
+  label: string;
+  colorA: string;
+  colorB: string;
+  min: number;
+  max: number;
+  step: number;
+  targetValue: number;
+  tolerance: number;
+}
+
+interface MultiSliderChallenge {
+  type: 'multi';
+  id: string;
+  brandName: string;
+  taskPrompt: string;
+  designerInsight: string;
+  parameters: MultiSliderParameter[];
+  renderLogo: (values: Record<string, number>, showOfficial: boolean) => React.ReactNode;
+}
+
+type LogoChallenge = SingleSliderChallenge | MultiSliderChallenge;
+
 const CHALLENGES: LogoChallenge[] = [
   {
+    type: 'multi',
     id: 'google-g',
-    brandName: 'Google "G"',
-    taskPrompt: 'Adjust the vertical position of the blue crossbar until the "G" feels optically balanced.',
-    designerInsight: 'Google famously broke geometric circularity for optical balance. If the crossbar were placed at the exact geometric midline (0px), the heavy red and yellow arches would make the logo feel like it was falling backwards. The crossbar is shifted slightly downward (+6px) to ground the visual weight.',
-    min: -24,
-    max: 24,
-    step: 1,
-    targetValue: 6,
-    tolerance: 30,
-    unit: 'px',
-    renderLogo: (value, showOfficial) => {
-      const activeY = showOfficial ? 6 : value;
-      // Dimensions: 200x200 viewBox="-100 -100 200 200"
-      return (
-        <svg viewBox="-100 -100 200 200" width="220" height="220" style={{ overflow: 'visible' }}>
-          {/* Red Arc (Top) */}
-          <path
-            d="M 68 -68 A 96 96 0 0 0 -68 -68 L -48 -48 A 68 68 0 0 1 48 -48 Z"
-            fill="#EA4335"
-          />
-          {/* Yellow Arc (Left) */}
-          <path
-            d="M -68 -68 A 96 96 0 0 0 -68 68 L -48 48 A 68 68 0 0 1 -48 -48 Z"
-            fill="#FBBC05"
-          />
-          {/* Green Arc (Bottom) */}
-          <path
-            d="M -68 68 A 96 96 0 0 0 68 68 L 48 48 A 68 68 0 0 1 -48 48 Z"
-            fill="#34A853"
-          />
-          {/* Blue Section: Right curve and horizontal crossbar */}
-          <path
-            d={`M 68 68 A 96 96 0 0 0 96 0 L 96 ${activeY} L 0 ${activeY} L 0 ${activeY - 30} L 68 ${activeY - 30} A 68 68 0 0 1 48 48 Z`}
-            fill="#4285F4"
-            style={{ transition: 'd 0.05s ease-out' }}
-          />
+    brandName: 'Google "G" Color Seams',
+    taskPrompt: 'Adjust the 4 color transition lines where Red, Yellow, Green, and Blue meet around the circle.',
+    designerInsight: 'Google’s 2015 brand redesign purposefully engineered non-symmetrical color transitions. Red meets Yellow in the top-left at 140° to give Red a dominant, welcoming header arch. Yellow meets Green at 218° to keep the warm tones balanced against the cool bottom. Green meets Blue at 315°, and Blue extends upward until 44° where it meets Red above the crossbar.',
+    parameters: [
+      {
+        id: 'redBlue',
+        label: 'Red / Blue Seam (Top-Right)',
+        colorA: '#EA4335',
+        colorB: '#4285F4',
+        min: 24,
+        max: 64,
+        step: 1,
+        targetValue: 44,
+        tolerance: 20
+      },
+      {
+        id: 'redYellow',
+        label: 'Red / Yellow Seam (Top-Left)',
+        colorA: '#EA4335',
+        colorB: '#FBBC05',
+        min: 115,
+        max: 165,
+        step: 1,
+        targetValue: 140,
+        tolerance: 25
+      },
+      {
+        id: 'yellowGreen',
+        label: 'Yellow / Green Seam (Bottom-Left)',
+        colorA: '#FBBC05',
+        colorB: '#34A853',
+        min: 195,
+        max: 245,
+        step: 1,
+        targetValue: 218,
+        tolerance: 25
+      },
+      {
+        id: 'greenBlue',
+        label: 'Green / Blue Seam (Bottom-Right)',
+        colorA: '#34A853',
+        colorB: '#4285F4',
+        min: 290,
+        max: 340,
+        step: 1,
+        targetValue: 315,
+        tolerance: 25
+      }
+    ],
+    renderLogo: (values, showOfficial) => {
+      const aRedBlue = showOfficial ? 44 : values['redBlue'];
+      const aRedYellow = showOfficial ? 140 : values['redYellow'];
+      const aYellowGreen = showOfficial ? 218 : values['yellowGreen'];
+      const aGreenBlue = showOfficial ? 315 : values['greenBlue'];
 
-          {/* Reference baseline marker when evaluated */}
+      const rIn = 52;
+      const rOut = 96;
+
+      const pathRed = arcPath(aRedBlue, aRedYellow, rIn, rOut);
+      const pathYellow = arcPath(aRedYellow, aYellowGreen, rIn, rOut);
+      const pathGreen = arcPath(aYellowGreen, aGreenBlue, rIn, rOut);
+      const pathBlueArc = arcPath(aGreenBlue, aRedBlue, rIn, rOut);
+
+      // Line endpoints for seam indicators
+      const seamLine = (deg: number, color: string) => {
+        const [x1, y1] = pt(deg, rIn - 4);
+        const [x2, y2] = pt(deg, rOut + 6);
+        return (
+          <line
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke={color}
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        );
+      };
+
+      return (
+        <svg viewBox="-120 -120 240 240" width="240" height="240" style={{ overflow: 'visible' }}>
+          <defs>
+            <clipPath id="googleOuterCircle">
+              <circle cx="0" cy="0" r="96" />
+            </clipPath>
+          </defs>
+
+          {/* Color Ring Arcs */}
+          <g clipPath="url(#googleOuterCircle)">
+            {/* Red Arc */}
+            <path d={pathRed} fill="#EA4335" />
+            {/* Yellow Arc */}
+            <path d={pathYellow} fill="#FBBC05" />
+            {/* Green Arc */}
+            <path d={pathGreen} fill="#34A853" />
+            {/* Blue Arc */}
+            <path d={pathBlueArc} fill="#4285F4" />
+
+            {/* Blue Horizontal Crossbar extending to center */}
+            <rect x="0" y="-22" width="96" height="44" fill="#4285F4" />
+          </g>
+
+          {/* Seam Indicator Lines */}
+          {seamLine(aRedBlue, '#ffffff')}
+          {seamLine(aRedYellow, '#ffffff')}
+          {seamLine(aYellowGreen, '#ffffff')}
+          {seamLine(aGreenBlue, '#ffffff')}
+
+          {/* Official Spec Reference Radial Lines */}
           {showOfficial && (
-            <line 
-              x1="-80" 
-              y1="6" 
-              x2="80" 
-              y2="6" 
-              stroke="#10B981" 
-              strokeWidth="2" 
-              strokeDasharray="4 4" 
-            />
+            <>
+              {seamLine(44, '#10B981')}
+              {seamLine(140, '#10B981')}
+              {seamLine(218, '#10B981')}
+              {seamLine(315, '#10B981')}
+            </>
           )}
         </svg>
       );
     }
   },
   {
+    type: 'single',
     id: 'mastercard',
     brandName: 'Mastercard Spheres',
     taskPrompt: 'Adjust the center-to-center spacing of the two spheres to recreate the authentic interlocking lens.',
@@ -136,6 +256,7 @@ const CHALLENGES: LogoChallenge[] = [
     }
   },
   {
+    type: 'single',
     id: 'target-bullseye',
     brandName: 'Target Bullseye',
     taskPrompt: 'Adjust the negative white ring width so the bullseye achieves the official 1:1:1 optical stroke ratio.',
@@ -148,8 +269,6 @@ const CHALLENGES: LogoChallenge[] = [
     unit: '%',
     renderLogo: (value, showOfficial) => {
       const activeWhitePct = showOfficial ? 33 : value;
-      // Total radius = 90.
-      // Target: inner radius = 30, middle white ring thickness = 30, outer red ring thickness = 30.
       const innerRadius = 90 * (1 - (activeWhitePct / 100)) * 0.5;
       const whiteOuterRadius = innerRadius + (90 * (activeWhitePct / 100));
 
@@ -168,10 +287,11 @@ const CHALLENGES: LogoChallenge[] = [
     }
   },
   {
+    type: 'single',
     id: 'spotify-waves',
     brandName: 'Spotify Soundwaves',
     taskPrompt: 'Adjust the counter-clockwise rotation angle of the soundwaves inside the green badge.',
-    designerInsight: 'Spotify\'s soundwaves are not horizontally level. Daniel Ek and the founding team tilted them precisely 16 degrees counter-clockwise to convey forward momentum and musical rhythm. A horizontal wave looks stagnant and static.',
+    designerInsight: 'Spotify\'s soundwaves are not horizontally level. Daniel Ek and the founding team tilted them precisely 16.5 degrees counter-clockwise to convey forward momentum and musical rhythm. A horizontal wave looks stagnant and static.',
     min: 0,
     max: 38,
     step: 0.5,
@@ -223,23 +343,50 @@ export default function LogoBalanceGame() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const activeChallenge = CHALLENGES[currentIndex];
 
-  // Initial user slider position set to a randomized inaccurate start
-  const [sliderValue, setSliderValue] = useState<number>(() => {
-    const spread = (activeChallenge.max - activeChallenge.min) * 0.35;
-    return Math.round(activeChallenge.targetValue + (Math.random() > 0.5 ? spread : -spread));
+  // Single slider state
+  const [singleValue, setSingleValue] = useState<number>(() => {
+    if (activeChallenge.type === 'single') {
+      const spread = (activeChallenge.max - activeChallenge.min) * 0.35;
+      return Math.round(activeChallenge.targetValue + (Math.random() > 0.5 ? spread : -spread));
+    }
+    return 0;
+  });
+
+  // Multi slider state (e.g. for Google 4 seams)
+  const [multiValues, setMultiValues] = useState<Record<string, number>>(() => {
+    const initial: Record<string, number> = {};
+    if (activeChallenge.type === 'multi') {
+      activeChallenge.parameters.forEach(p => {
+        const offset = Math.round((Math.random() - 0.5) * 24);
+        initial[p.id] = p.targetValue + (offset === 0 ? 12 : offset);
+      });
+    }
+    return initial;
   });
 
   const [hasChecked, setHasChecked] = useState(false);
   const [viewMode, setViewMode] = useState<'user' | 'official'>('user');
   const [copiedShare, setCopiedShare] = useState(false);
 
-  const calculateScore = () => {
-    const diff = Math.abs(sliderValue - activeChallenge.targetValue);
-    const score = Math.max(0, Math.round(100 - (diff / activeChallenge.tolerance) * 100));
-    return Math.min(100, score);
+  // Score Calculation
+  const calculateTotalScore = () => {
+    if (activeChallenge.type === 'single') {
+      const diff = Math.abs(singleValue - activeChallenge.targetValue);
+      const score = Math.max(0, Math.round(100 - (diff / activeChallenge.tolerance) * 100));
+      return Math.min(100, score);
+    } else {
+      let sumScores = 0;
+      activeChallenge.parameters.forEach(p => {
+        const val = multiValues[p.id] ?? p.targetValue;
+        const diff = Math.abs(val - p.targetValue);
+        const pScore = Math.max(0, Math.round(100 - (diff / p.tolerance) * 100));
+        sumScores += Math.min(100, pScore);
+      });
+      return Math.round(sumScores / activeChallenge.parameters.length);
+    }
   };
 
-  const currentScore = calculateScore();
+  const totalScore = calculateTotalScore();
 
   const handleNextChallenge = () => {
     const nextIdx = (currentIndex + 1) % CHALLENGES.length;
@@ -247,8 +394,18 @@ export default function LogoBalanceGame() {
     setCurrentIndex(nextIdx);
     setHasChecked(false);
     setViewMode('user');
-    const spread = (nextChallenge.max - nextChallenge.min) * 0.35;
-    setSliderValue(Math.round(nextChallenge.targetValue + (Math.random() > 0.5 ? spread : -spread)));
+
+    if (nextChallenge.type === 'single') {
+      const spread = (nextChallenge.max - nextChallenge.min) * 0.35;
+      setSingleValue(Math.round(nextChallenge.targetValue + (Math.random() > 0.5 ? spread : -spread)));
+    } else {
+      const nextMulti: Record<string, number> = {};
+      nextChallenge.parameters.forEach(p => {
+        const offset = Math.round((Math.random() - 0.5) * 24);
+        nextMulti[p.id] = p.targetValue + (offset === 0 ? 12 : offset);
+      });
+      setMultiValues(nextMulti);
+    }
   };
 
   const handleReset = () => {
@@ -257,18 +414,18 @@ export default function LogoBalanceGame() {
   };
 
   const handleShare = () => {
-    const text = `Logo Balance #0${currentIndex + 1}: ${currentScore}% optical precision on ${activeChallenge.brandName}.\nPlay on https://dg.tools/games/logo-balance`;
+    const text = `Logo Balance: ${totalScore}% optical precision on ${activeChallenge.brandName}.\nPlay on https://dg.tools/games/logo-balance`;
     navigator.clipboard.writeText(text);
     setCopiedShare(true);
     setTimeout(() => setCopiedShare(false), 2000);
   };
 
   return (
-    <div style={{ maxWidth: '820px', margin: '0 auto', padding: '1rem 0 5rem 0' }}>
+    <div style={{ maxWidth: '840px', margin: '0 auto', padding: '1rem 0 5rem 0' }}>
       {/* Top Breadcrumb & Status */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
         <Link 
-          href="/"
+          href="/games"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -280,7 +437,7 @@ export default function LogoBalanceGame() {
           }}
         >
           <ArrowLeft size={14} />
-          <span>dg.tools Hub</span>
+          <span>Games Portal</span>
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -330,7 +487,7 @@ export default function LogoBalanceGame() {
                   cursor: 'pointer'
                 }}
               >
-                Your Balance ({sliderValue}{activeChallenge.unit})
+                Your Balance
               </button>
               <button
                 onClick={() => setViewMode('official')}
@@ -345,7 +502,7 @@ export default function LogoBalanceGame() {
                   cursor: 'pointer'
                 }}
               >
-                Official Spec ({activeChallenge.targetValue}{activeChallenge.unit})
+                Official Spec (Green Overlay)
               </button>
             </div>
           </div>
@@ -366,80 +523,198 @@ export default function LogoBalanceGame() {
             marginBottom: '2.5rem'
           }}
         >
-          {activeChallenge.renderLogo(sliderValue, viewMode === 'official')}
+          {activeChallenge.type === 'single'
+            ? activeChallenge.renderLogo(singleValue, viewMode === 'official')
+            : activeChallenge.renderLogo(multiValues, viewMode === 'official')}
 
           <div style={{ position: 'absolute', bottom: '0.75rem', right: '1rem', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
             {viewMode === 'official' ? 'Official Brand Geometry' : 'Interactive Optical Canvas'}
           </div>
         </div>
 
-        {/* Controls */}
-        <div style={{ maxWidth: '640px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Optical Adjustment</span>
-            <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'monospace' }}>
-              {sliderValue > 0 && activeChallenge.unit === 'px' ? `+${sliderValue}${activeChallenge.unit}` : `${sliderValue}${activeChallenge.unit}`}
-            </span>
-          </div>
+        {/* Controls Section */}
+        <div style={{ maxWidth: '680px', margin: '0 auto' }}>
+          {activeChallenge.type === 'single' ? (
+            /* Single Slider Controls */
+            <div style={{ marginBottom: '1.75rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Optical Adjustment</span>
+                <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'monospace' }}>
+                  {singleValue > 0 && activeChallenge.unit === 'px' ? `+${singleValue}${activeChallenge.unit}` : `${singleValue}${activeChallenge.unit}`}
+                </span>
+              </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.75rem' }}>
-            <button
-              onClick={() => setSliderValue(v => Math.max(activeChallenge.min, v - activeChallenge.step))}
-              disabled={hasChecked}
-              style={{
-                backgroundColor: 'var(--bg-card-muted)',
-                color: 'var(--text-secondary)',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: '6px',
-                width: '36px',
-                height: '36px',
-                cursor: hasChecked ? 'default' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 700
-              }}
-            >
-              -
-            </button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <button
+                  onClick={() => setSingleValue(v => Math.max(activeChallenge.min, v - activeChallenge.step))}
+                  disabled={hasChecked}
+                  style={{
+                    backgroundColor: 'var(--bg-card-muted)',
+                    color: 'var(--text-secondary)',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: '6px',
+                    width: '36px',
+                    height: '36px',
+                    cursor: hasChecked ? 'default' : 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 700
+                  }}
+                >
+                  -
+                </button>
 
-            <input 
-              type="range"
-              min={activeChallenge.min}
-              max={activeChallenge.max}
-              step={activeChallenge.step}
-              value={sliderValue}
-              onChange={(e) => {
-                setSliderValue(parseFloat(e.target.value));
-                if (hasChecked) {
-                  setHasChecked(false);
-                  setViewMode('user');
-                }
-              }}
-              disabled={hasChecked}
-              style={{ flex: 1 }}
-            />
+                <input 
+                  type="range"
+                  min={activeChallenge.min}
+                  max={activeChallenge.max}
+                  step={activeChallenge.step}
+                  value={singleValue}
+                  onChange={(e) => {
+                    setSingleValue(parseFloat(e.target.value));
+                    if (hasChecked) {
+                      setHasChecked(false);
+                      setViewMode('user');
+                    }
+                  }}
+                  disabled={hasChecked}
+                  style={{ flex: 1 }}
+                />
 
-            <button
-              onClick={() => setSliderValue(v => Math.min(activeChallenge.max, v + activeChallenge.step))}
-              disabled={hasChecked}
-              style={{
-                backgroundColor: 'var(--bg-card-muted)',
-                color: 'var(--text-secondary)',
-                border: '1px solid var(--border-subtle)',
-                borderRadius: '6px',
-                width: '36px',
-                height: '36px',
-                cursor: hasChecked ? 'default' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 700
-              }}
-            >
-              +
-            </button>
-          </div>
+                <button
+                  onClick={() => setSingleValue(v => Math.min(activeChallenge.max, v + activeChallenge.step))}
+                  disabled={hasChecked}
+                  style={{
+                    backgroundColor: 'var(--bg-card-muted)',
+                    color: 'var(--text-secondary)',
+                    border: '1px solid var(--border-subtle)',
+                    borderRadius: '6px',
+                    width: '36px',
+                    height: '36px',
+                    cursor: hasChecked ? 'default' : 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 700
+                  }}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          ) : (
+            /* Multi Slider Controls for Google 4 Seams */
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '2rem' }}>
+              {activeChallenge.parameters.map((param) => {
+                const currentVal = multiValues[param.id] ?? param.targetValue;
+                const diff = Math.abs(currentVal - param.targetValue);
+                const paramAccuracy = Math.max(0, Math.round(100 - (diff / param.tolerance) * 100));
+
+                return (
+                  <div 
+                    key={param.id}
+                    style={{ 
+                      backgroundColor: 'var(--bg-card)', 
+                      border: '1px solid var(--border-subtle)', 
+                      borderRadius: '8px', 
+                      padding: '1rem 1.25rem' 
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.6rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
+                          <span style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: param.colorA, display: 'inline-block' }}></span>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>/</span>
+                          <span style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: param.colorB, display: 'inline-block' }}></span>
+                        </div>
+                        <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                          {param.label}
+                        </span>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        {hasChecked && (
+                          <span className="mono-label" style={{ color: paramAccuracy >= 90 ? '#10b981' : paramAccuracy >= 75 ? '#f59e0b' : '#ef4444' }}>
+                            {paramAccuracy}%
+                          </span>
+                        )}
+                        <span style={{ fontSize: '0.85rem', fontWeight: 800, fontFamily: 'monospace', color: 'var(--text-primary)' }}>
+                          {currentVal}°
+                        </span>
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <button
+                        onClick={() => setMultiValues(prev => ({
+                          ...prev,
+                          [param.id]: Math.max(param.min, (prev[param.id] ?? param.targetValue) - param.step)
+                        }))}
+                        disabled={hasChecked}
+                        style={{
+                          backgroundColor: 'var(--bg-card-muted)',
+                          color: 'var(--text-secondary)',
+                          border: '1px solid var(--border-subtle)',
+                          borderRadius: '5px',
+                          width: '30px',
+                          height: '30px',
+                          cursor: hasChecked ? 'default' : 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontWeight: 700
+                        }}
+                      >
+                        -
+                      </button>
+
+                      <input 
+                        type="range"
+                        min={param.min}
+                        max={param.max}
+                        step={param.step}
+                        value={currentVal}
+                        onChange={(e) => {
+                          const val = parseFloat(e.target.value);
+                          setMultiValues(prev => ({ ...prev, [param.id]: val }));
+                          if (hasChecked) {
+                            setHasChecked(false);
+                            setViewMode('user');
+                          }
+                        }}
+                        disabled={hasChecked}
+                        style={{ flex: 1 }}
+                      />
+
+                      <button
+                        onClick={() => setMultiValues(prev => ({
+                          ...prev,
+                          [param.id]: Math.min(param.max, (prev[param.id] ?? param.targetValue) + param.step)
+                        }))}
+                        disabled={hasChecked}
+                        style={{
+                          backgroundColor: 'var(--bg-card-muted)',
+                          color: 'var(--text-secondary)',
+                          border: '1px solid var(--border-subtle)',
+                          borderRadius: '5px',
+                          width: '30px',
+                          height: '30px',
+                          cursor: hasChecked ? 'default' : 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontWeight: 700
+                        }}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           {/* Action Buttons */}
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
@@ -537,18 +812,20 @@ export default function LogoBalanceGame() {
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
               <div>
-                <span className="mono-label" style={{ color: currentScore >= 90 ? '#10b981' : currentScore >= 75 ? '#f59e0b' : '#ef4444' }}>
-                  {currentScore >= 95 ? 'Master Creative Director Eye' : currentScore >= 85 ? 'High Optical Intuition' : currentScore >= 70 ? 'Competent Eye' : 'Needs Geometric Training'}
+                <span className="mono-label" style={{ color: totalScore >= 90 ? '#10b981' : totalScore >= 75 ? '#f59e0b' : '#ef4444' }}>
+                  {totalScore >= 95 ? 'Master Creative Director Eye' : totalScore >= 85 ? 'High Optical Intuition' : totalScore >= 70 ? 'Competent Eye' : 'Needs Geometric Calibration'}
                 </span>
                 <div style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--text-primary)', marginTop: '0.2rem' }}>
-                  {currentScore}% Optical Accuracy
+                  {totalScore}% Overall Accuracy
                 </div>
               </div>
 
-              <div style={{ textAlign: 'right', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                <div>Target: <strong style={{ color: 'var(--text-primary)' }}>{activeChallenge.targetValue}{activeChallenge.unit}</strong></div>
-                <div>Your guess: <strong style={{ color: 'var(--text-primary)' }}>{sliderValue}{activeChallenge.unit}</strong></div>
-              </div>
+              {activeChallenge.type === 'single' && (
+                <div style={{ textAlign: 'right', fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                  <div>Target: <strong style={{ color: 'var(--text-primary)' }}>{activeChallenge.targetValue}{activeChallenge.unit}</strong></div>
+                  <div>Your guess: <strong style={{ color: 'var(--text-primary)' }}>{singleValue}{activeChallenge.unit}</strong></div>
+                </div>
+              )}
             </div>
 
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginTop: '0.75rem' }}>
