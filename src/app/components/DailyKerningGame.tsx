@@ -110,7 +110,7 @@ export default function DailyKerningGame() {
         {/* Word Kerning Stage */}
         <div 
           style={{ 
-            backgroundColor: '#000000', 
+            backgroundColor: '#f8fafc', 
             border: '1px solid var(--border-subtle)', 
             borderRadius: '8px', 
             padding: '4rem 1.5rem', 
@@ -140,8 +140,8 @@ export default function DailyKerningGame() {
                   style={{
                     display: 'inline-block',
                     marginLeft: isTarget ? `${currentOffset}px` : undefined,
-                    color: isTarget ? '#ffffff' : '#71717a',
-                    borderBottom: isTarget ? '2px solid #3b82f6' : 'none',
+                    color: isTarget ? '#0f172a' : '#64748b',
+                    borderBottom: isTarget ? '2px solid #2563eb' : 'none',
                     paddingBottom: isTarget ? '4px' : undefined,
                     transition: 'margin 0.05s ease-out'
                   }}
@@ -182,8 +182,8 @@ export default function DailyKerningGame() {
             onClick={handleEvaluate}
             disabled={hasEvaluated}
             style={{
-              backgroundColor: hasEvaluated ? 'var(--bg-card-muted)' : '#f4f4f5',
-              color: hasEvaluated ? 'var(--text-muted)' : '#09090b',
+              backgroundColor: hasEvaluated ? 'var(--bg-card-muted)' : '#0f172a',
+              color: hasEvaluated ? 'var(--text-muted)' : '#ffffff',
               border: 'none',
               borderRadius: '6px',
               fontWeight: 700,
@@ -193,6 +193,7 @@ export default function DailyKerningGame() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '0.35rem',
+              boxShadow: hasEvaluated ? 'none' : '0 4px 12px rgba(15, 23, 42, 0.12)',
               transition: 'all 0.15s ease'
             }}
           >

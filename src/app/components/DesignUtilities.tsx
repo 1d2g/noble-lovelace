@@ -71,8 +71,8 @@ export default function DesignUtilities() {
                   key={p.name}
                   onClick={() => setSelectedRatioIndex(idx)}
                   style={{
-                    backgroundColor: selectedRatioIndex === idx ? '#f4f4f5' : 'var(--bg-card-muted)',
-                    color: selectedRatioIndex === idx ? '#09090b' : 'var(--text-secondary)',
+                    backgroundColor: selectedRatioIndex === idx ? '#0f172a' : 'var(--bg-card-muted)',
+                    color: selectedRatioIndex === idx ? '#ffffff' : 'var(--text-secondary)',
                     border: '1px solid var(--border-subtle)',
                     borderRadius: '5px',
                     fontSize: '0.75rem',
@@ -174,13 +174,14 @@ export default function DesignUtilities() {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '0.4rem',
-              backgroundColor: '#f4f4f5',
-              color: '#09090b',
+              backgroundColor: '#0f172a',
+              color: '#ffffff',
               fontWeight: 700,
               fontSize: '0.85rem',
               padding: '0.75rem',
               borderRadius: '6px',
               marginTop: '1.5rem',
+              boxShadow: '0 4px 12px rgba(15, 23, 42, 0.12)',
               transition: 'all 0.15s ease'
             }}
           >

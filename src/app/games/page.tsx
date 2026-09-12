@@ -121,8 +121,8 @@ export default function GamesHubPage() {
                   <Link
                     href={g.slug}
                     style={{
-                      backgroundColor: '#f4f4f5',
-                      color: '#09090b',
+                      backgroundColor: '#0f172a',
+                      color: '#ffffff',
                       fontSize: '0.875rem',
                       fontWeight: 800,
                       padding: '0.75rem 1.5rem',
@@ -130,7 +130,8 @@ export default function GamesHubPage() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '0.4rem',
-                      transition: 'all 0.15s ease'
+                      transition: 'all 0.15s ease',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
                     }}
                   >
                     <span>Play Now</span>
@@ -188,15 +189,16 @@ export default function GamesHubPage() {
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            backgroundColor: '#f4f4f5',
-            color: '#09090b',
+            backgroundColor: '#0f172a',
+            color: '#ffffff',
             fontSize: '0.85rem',
             fontWeight: 800,
             padding: '0.75rem 1.5rem',
             borderRadius: '6px',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '0.4rem'
+            gap: '0.4rem',
+            boxShadow: '0 4px 12px rgba(15, 23, 42, 0.12)'
           }}
         >
           <span>Explore VeloTime</span>

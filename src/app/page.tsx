@@ -77,12 +77,12 @@ export default function Home() {
               gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
               gap: '2.5rem',
               padding: '2.5rem',
-              backgroundColor: '#101014'
+              backgroundColor: '#ffffff'
             }}
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-                <span className="mono-label" style={{ color: '#10b981', fontWeight: 700 }}>Flagship SaaS</span>
+                <span className="mono-label" style={{ color: '#059669', fontWeight: 700 }}>Flagship SaaS</span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>•</span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>$5/user/month</span>
               </div>
@@ -97,19 +97,19 @@ export default function Home() {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '2rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                  <CheckCircle size={15} style={{ color: '#10b981' }} />
+                  <CheckCircle size={15} style={{ color: '#059669' }} />
                   <span>10-Second Weekly Grid</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                  <CheckCircle size={15} style={{ color: '#10b981' }} />
+                  <CheckCircle size={15} style={{ color: '#059669' }} />
                   <span>Zero Stopwatch Anxiety</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                  <CheckCircle size={15} style={{ color: '#10b981' }} />
+                  <CheckCircle size={15} style={{ color: '#059669' }} />
                   <span>Zero Employee Spyware</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                  <CheckCircle size={15} style={{ color: '#10b981' }} />
+                  <CheckCircle size={15} style={{ color: '#059669' }} />
                   <span>Harvest &amp; Toggl CSV Import</span>
                 </div>
               </div>
@@ -120,8 +120,8 @@ export default function Home() {
                   target="_blank" 
                   rel="noopener noreferrer"
                   style={{
-                    backgroundColor: '#f4f4f5',
-                    color: '#09090b',
+                    backgroundColor: '#0f172a',
+                    color: '#ffffff',
                     fontWeight: 800,
                     fontSize: '0.9rem',
                     padding: '0.75rem 1.5rem',
@@ -129,7 +129,8 @@ export default function Home() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.4rem',
-                    transition: 'all 0.15s ease'
+                    transition: 'all 0.15s ease',
+                    boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
                   }}
                 >
                   <span>Launch VeloTime</span>
@@ -155,22 +156,23 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Visual Matrix Mockup Preview */}
+            {/* Visual Matrix Mockup Preview (Clean VeloTime Spreadsheet Style) */}
             <div 
               style={{ 
-                backgroundColor: '#09090b', 
-                border: '1px solid var(--border-subtle)', 
+                backgroundColor: '#f8fafc', 
+                border: '1px solid #cbd5e1', 
                 borderRadius: '8px', 
                 padding: '1.5rem',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+                boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.02)'
               }}
             >
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.75rem' }}>
                   <span className="mono-label" style={{ color: 'var(--text-muted)' }}>VeloTime Weekly Grid Preview</span>
-                  <span style={{ fontSize: '0.7rem', color: '#10b981', fontWeight: 600 }}>Offline-First Sync</span>
+                  <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 700 }}>Offline-First Sync</span>
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.775rem' }}>
@@ -183,7 +185,7 @@ export default function Home() {
                     <span style={{ textAlign: 'center' }}>F</span>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr 1fr', padding: '0.5rem 0.25rem', backgroundColor: 'var(--bg-card)', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr 1fr', padding: '0.5rem 0.25rem', backgroundColor: '#ffffff', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
                     <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Acme Rebrand</span>
                     <span style={{ textAlign: 'center' }}>4.0</span>
                     <span style={{ textAlign: 'center' }}>4.0</span>
@@ -192,7 +194,7 @@ export default function Home() {
                     <span style={{ textAlign: 'center' }}>4.0</span>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr 1fr', padding: '0.5rem 0.25rem', backgroundColor: 'var(--bg-card)', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr 1fr', padding: '0.5rem 0.25rem', backgroundColor: '#ffffff', borderRadius: '4px', border: '1px solid #e2e8f0' }}>
                     <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Nike Campaign</span>
                     <span style={{ textAlign: 'center' }}>4.0</span>
                     <span style={{ textAlign: 'center' }}>3.5</span>
@@ -201,7 +203,7 @@ export default function Home() {
                     <span style={{ textAlign: 'center' }}>4.0</span>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr 1fr', padding: '0.5rem 0.25rem', borderTop: '1px solid var(--border-subtle)', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr 1fr 1fr 1fr', padding: '0.5rem 0.25rem', borderTop: '1px solid #cbd5e1', fontWeight: 700, color: 'var(--text-primary)' }}>
                     <span>Weekly Total</span>
                     <span style={{ textAlign: 'center' }}>8.0</span>
                     <span style={{ textAlign: 'center' }}>7.5</span>
@@ -219,9 +221,9 @@ export default function Home() {
           </div>
 
           {/* Card 2: UX Auditor Agent */}
-          <div className="hub-card" style={{ gridColumn: 'span 6' }}>
+          <div className="hub-card" style={{ gridColumn: 'span 6', backgroundColor: '#ffffff' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <span className="mono-label" style={{ color: '#3b82f6', fontWeight: 700 }}>Autonomous Agent</span>
+              <span className="mono-label" style={{ color: '#2563eb', fontWeight: 700 }}>Autonomous Agent</span>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>•</span>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Production Internal</span>
             </div>
@@ -235,16 +237,16 @@ export default function Home() {
             </p>
 
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>Headless Playwright</span>
-              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>Gemini Vision Engine</span>
-              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>Token Linter</span>
+              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Headless Playwright</span>
+              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Gemini Vision Engine</span>
+              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Token Linter</span>
             </div>
           </div>
 
           {/* Card 3: Quick-Matrix Extension */}
-          <div className="hub-card" style={{ gridColumn: 'span 6' }}>
+          <div className="hub-card" style={{ gridColumn: 'span 6', backgroundColor: '#ffffff' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <span className="mono-label" style={{ color: '#f59e0b', fontWeight: 700 }}>Extension Suite</span>
+              <span className="mono-label" style={{ color: '#d97706', fontWeight: 700 }}>Extension Suite</span>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>•</span>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>In Development</span>
             </div>
@@ -258,9 +260,9 @@ export default function Home() {
             </p>
 
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>Chrome Web Store</span>
-              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>Keyboard First</span>
-              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>Figma Integration</span>
+              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Chrome Web Store</span>
+              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Keyboard First</span>
+              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Figma Integration</span>
             </div>
           </div>
         </div>
@@ -270,7 +272,7 @@ export default function Home() {
       <section id="daily-games" style={{ marginTop: '5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <div>
-            <span className="mono-label" style={{ color: '#10b981', fontWeight: 700 }}>Daily Micro-Challenges</span>
+            <span className="mono-label" style={{ color: '#059669', fontWeight: 700 }}>Daily Micro-Challenges</span>
             <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '0.2rem' }}>
               Daily Designer Games
             </h2>
@@ -298,7 +300,7 @@ export default function Home() {
             className="hub-card" 
             style={{ 
               padding: '2rem', 
-              backgroundColor: '#101014',
+              backgroundColor: '#ffffff',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between'
@@ -306,7 +308,7 @@ export default function Home() {
           >
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                <span className="mono-label" style={{ color: '#10b981', fontWeight: 700 }}>Featured Challenge</span>
+                <span className="mono-label" style={{ color: '#059669', fontWeight: 700 }}>Featured Challenge</span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>•</span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Live on /games/logo-balance</span>
               </div>
@@ -320,7 +322,7 @@ export default function Home() {
               </p>
 
               {/* Mini visual teaser */}
-              <div style={{ backgroundColor: '#000000', borderRadius: '8px', border: '1px solid var(--border-subtle)', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', marginBottom: '1.5rem' }}>
+              <div style={{ backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid var(--border-subtle)', padding: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', marginBottom: '1.5rem' }}>
                 {/* Mini Google G snippet */}
                 <svg viewBox="-50 -50 100 100" width="48" height="48">
                   <path d="M 34 -34 A 48 48 0 0 0 -34 -34 L -24 -24 A 34 34 0 0 1 24 -24 Z" fill="#EA4335" />
@@ -344,8 +346,8 @@ export default function Home() {
             <Link
               href="/games/logo-balance"
               style={{
-                backgroundColor: '#f4f4f5',
-                color: '#09090b',
+                backgroundColor: '#0f172a',
+                color: '#ffffff',
                 fontSize: '0.875rem',
                 fontWeight: 800,
                 padding: '0.75rem 1.5rem',
@@ -354,7 +356,8 @@ export default function Home() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '0.4rem',
-                transition: 'all 0.15s ease'
+                transition: 'all 0.15s ease',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
               }}
             >
               <span>Play Logo Balance</span>

@@ -389,7 +389,7 @@ export default function LogoBalanceGame() {
         className="hub-card" 
         style={{ 
           padding: '2.5rem 2rem', 
-          backgroundColor: '#0d0d11',
+          backgroundColor: '#ffffff',
           border: '1px solid var(--border-subtle)',
           borderRadius: '12px'
         }}
@@ -397,12 +397,12 @@ export default function LogoBalanceGame() {
         {/* Toggle Mode Bar (User vs Official Spec) */}
         {isCurrentChecked && (
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-            <div style={{ backgroundColor: 'var(--bg-page)', border: '1px solid var(--border-subtle)', borderRadius: '8px', padding: '0.25rem', display: 'inline-flex', gap: '0.25rem' }}>
+            <div style={{ backgroundColor: 'var(--bg-card-muted)', border: '1px solid var(--border-subtle)', borderRadius: '8px', padding: '0.25rem', display: 'inline-flex', gap: '0.25rem' }}>
               <button
                 onClick={() => setViewMode('user')}
                 style={{
-                  backgroundColor: viewMode === 'user' ? '#f4f4f5' : 'transparent',
-                  color: viewMode === 'user' ? '#09090b' : 'var(--text-secondary)',
+                  backgroundColor: viewMode === 'user' ? '#0f172a' : 'transparent',
+                  color: viewMode === 'user' ? '#ffffff' : 'var(--text-secondary)',
                   border: 'none',
                   borderRadius: '6px',
                   fontSize: '0.775rem',
@@ -417,7 +417,7 @@ export default function LogoBalanceGame() {
                 onClick={() => setViewMode('official')}
                 style={{
                   backgroundColor: viewMode === 'official' ? '#10b981' : 'transparent',
-                  color: viewMode === 'official' ? '#09090b' : 'var(--text-secondary)',
+                  color: viewMode === 'official' ? '#ffffff' : 'var(--text-secondary)',
                   border: 'none',
                   borderRadius: '6px',
                   fontSize: '0.775rem',
@@ -435,7 +435,7 @@ export default function LogoBalanceGame() {
         {/* Vector Canvas Container */}
         <div 
           style={{ 
-            backgroundColor: '#000000', 
+            backgroundColor: '#f8fafc', 
             borderRadius: '12px', 
             border: '1px solid var(--border-subtle)',
             padding: '2.5rem 1.5rem', 
@@ -567,8 +567,8 @@ export default function LogoBalanceGame() {
               <button
                 onClick={handleCheckBalance}
                 style={{
-                  backgroundColor: '#f4f4f5',
-                  color: '#09090b',
+                  backgroundColor: '#0f172a',
+                  color: '#ffffff',
                   fontWeight: 800,
                   fontSize: '0.9rem',
                   padding: '0.75rem 2rem',
@@ -578,6 +578,7 @@ export default function LogoBalanceGame() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '0.5rem',
+                  boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)',
                   transition: 'all 0.15s ease'
                 }}
               >
@@ -589,8 +590,8 @@ export default function LogoBalanceGame() {
                 <button
                   onClick={handleNextStep}
                   style={{
-                    backgroundColor: '#f4f4f5',
-                    color: '#09090b',
+                    backgroundColor: '#0f172a',
+                    color: '#ffffff',
                     fontWeight: 800,
                     fontSize: '0.9rem',
                     padding: '0.75rem 1.75rem',
@@ -599,7 +600,8 @@ export default function LogoBalanceGame() {
                     cursor: 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '0.4rem'
+                    gap: '0.4rem',
+                    boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)'
                   }}
                 >
                   <span>{challengeIdx < 5 ? 'Next Logo Archetype' : 'View Daily Scorecard'}</span>
@@ -673,7 +675,7 @@ export default function LogoBalanceGame() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            backgroundColor: 'rgba(15, 23, 42, 0.45)',
             backdropFilter: 'blur(6px)',
             display: 'flex',
             alignItems: 'center',
@@ -684,14 +686,14 @@ export default function LogoBalanceGame() {
         >
           <div 
             style={{
-              backgroundColor: '#0d0d11',
+              backgroundColor: '#ffffff',
               border: '1px solid var(--border-subtle)',
               borderRadius: '16px',
               maxWidth: '560px',
               width: '100%',
               padding: '2rem',
               position: 'relative',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.6)'
+              boxShadow: '0 24px 64px rgba(15, 23, 42, 0.15)'
             }}
           >
             <button
@@ -713,7 +715,7 @@ export default function LogoBalanceGame() {
               <span className="mono-label" style={{ color: '#10b981', fontWeight: 700 }}>
                 Day {selectedDay} Summary • {getDayDateString(selectedDay)}
               </span>
-              <h2 style={{ fontSize: '2rem', fontWeight: 900, marginTop: '0.4rem', letterSpacing: '-0.02em' }}>
+              <h2 style={{ fontSize: '2rem', fontWeight: 900, marginTop: '0.4rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
                 {dayAverageScore}% Precision
               </h2>
               <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
@@ -733,7 +735,7 @@ export default function LogoBalanceGame() {
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       padding: '0.6rem 0.85rem',
-                      backgroundColor: 'var(--bg-card)',
+                      backgroundColor: 'var(--bg-card-muted)',
                       borderRadius: '8px',
                       border: '1px solid var(--border-subtle)'
                     }}
@@ -748,7 +750,7 @@ export default function LogoBalanceGame() {
                     </div>
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      <div style={{ width: '80px', height: '6px', backgroundColor: 'var(--bg-card-muted)', borderRadius: '3px', overflow: 'hidden' }}>
+                      <div style={{ width: '80px', height: '6px', backgroundColor: '#e2e8f0', borderRadius: '3px', overflow: 'hidden' }}>
                         <div style={{ width: `${sc}%`, height: '100%', backgroundColor: sc >= 90 ? '#10b981' : sc >= 75 ? '#f59e0b' : '#ef4444' }} />
                       </div>
                       <span className="mono-label" style={{ fontWeight: 800, width: '38px', textAlign: 'right' }}>
@@ -766,8 +768,8 @@ export default function LogoBalanceGame() {
                 onClick={handleShareDay}
                 style={{
                   flex: 1,
-                  backgroundColor: '#f4f4f5',
-                  color: '#09090b',
+                  backgroundColor: '#0f172a',
+                  color: '#ffffff',
                   fontWeight: 800,
                   fontSize: '0.875rem',
                   padding: '0.75rem 1rem',
@@ -777,7 +779,8 @@ export default function LogoBalanceGame() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '0.4rem'
+                  gap: '0.4rem',
+                  boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)'
                 }}
               >
                 {copiedShare ? <Check size={15} style={{ color: '#10b981' }} /> : <Share2 size={15} />}
@@ -816,7 +819,7 @@ export default function LogoBalanceGame() {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            backgroundColor: 'rgba(15, 23, 42, 0.45)',
             backdropFilter: 'blur(6px)',
             display: 'flex',
             alignItems: 'center',
@@ -827,7 +830,7 @@ export default function LogoBalanceGame() {
         >
           <div 
             style={{
-              backgroundColor: '#0d0d11',
+              backgroundColor: '#ffffff',
               border: '1px solid var(--border-subtle)',
               borderRadius: '16px',
               maxWidth: '680px',
@@ -836,14 +839,14 @@ export default function LogoBalanceGame() {
               display: 'flex',
               flexDirection: 'column',
               position: 'relative',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.6)',
+              boxShadow: '0 24px 64px rgba(15, 23, 42, 0.15)',
               overflow: 'hidden'
             }}
           >
             {/* Archive Header */}
             <div style={{ padding: '1.5rem 1.75rem', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0 }}>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)' }}>
                   100-Day Challenge Archive
                 </h3>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: '0.2rem 0 0 0' }}>
@@ -880,12 +883,12 @@ export default function LogoBalanceGame() {
                         key={dayNum}
                         title={`Unlocks on ${getDayDateString(dayNum)}`}
                         style={{
-                          backgroundColor: 'rgba(255,255,255,0.02)',
-                          border: '1px solid rgba(255,255,255,0.04)',
+                          backgroundColor: 'rgba(0, 0, 0, 0.03)',
+                          border: '1px solid var(--border-subtle)',
                           borderRadius: '8px',
                           padding: '0.75rem 0.5rem',
                           textAlign: 'center',
-                          opacity: 0.35,
+                          opacity: 0.45,
                           cursor: 'not-allowed',
                           display: 'flex',
                           flexDirection: 'column',
@@ -913,7 +916,7 @@ export default function LogoBalanceGame() {
                         border: isCurrent 
                           ? '1px solid #10b981' 
                           : isToday 
-                            ? '1px solid rgba(255,255,255,0.2)' 
+                            ? '1px solid #0f172a' 
                             : '1px solid var(--border-subtle)',
                         borderRadius: '8px',
                         padding: '0.65rem 0.5rem',
@@ -949,7 +952,7 @@ export default function LogoBalanceGame() {
             </div>
 
             {/* Archive Footer info */}
-            <div style={{ padding: '1rem 1.75rem', borderTop: '1px solid var(--border-subtle)', backgroundColor: 'var(--bg-card)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+            <div style={{ padding: '1rem 1.75rem', borderTop: '1px solid var(--border-subtle)', backgroundColor: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
               <span>Played: {playedDays.length} of {currentSystemDay} unlocked days</span>
               <button
                 onClick={() => {
@@ -1001,15 +1004,16 @@ export default function LogoBalanceGame() {
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            backgroundColor: '#f4f4f5',
-            color: '#09090b',
+            backgroundColor: '#0f172a',
+            color: '#ffffff',
             fontSize: '0.825rem',
             fontWeight: 700,
             padding: '0.6rem 1.2rem',
             borderRadius: '6px',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '0.35rem'
+            gap: '0.35rem',
+            boxShadow: '0 4px 12px rgba(15, 23, 42, 0.12)'
           }}
         >
           <span>Try VeloTime Demo</span>
