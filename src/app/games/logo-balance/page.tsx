@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import LogoBalanceGame from './LogoBalanceGame';
 
 export const metadata: Metadata = {
@@ -12,5 +13,16 @@ export const metadata: Metadata = {
 };
 
 export default function LogoBalancePage() {
-  return <LogoBalanceGame />;
+  return (
+    <>
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9905023034596970"
+        crossOrigin="anonymous"
+        strategy="afterInteractive"
+      />
+      <LogoBalanceGame />
+    </>
+  );
 }
+
