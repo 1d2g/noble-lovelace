@@ -69,6 +69,7 @@ export interface DayChallenge {
   id: string;
   dayNumber: number;
   archetypeId: ArchetypeId;
+  brandId: string;
   brandName: string;
   taskPrompt: string;
   designerInsight: string;
