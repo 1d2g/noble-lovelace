@@ -8,6 +8,7 @@ import {
   FileSpreadsheet,
   ArrowRight
 } from 'lucide-react';
+import GoogleAdUnit from './GoogleAdUnit';
 
 export default function GameSidebarAds() {
   return (
@@ -137,6 +138,9 @@ export default function GameSidebarAds() {
           </a>
         </div>
       </div>
+
+      {/* Alternate Revenue Stream: Google AdSense Unit */}
+      <GoogleAdUnit slot="sidebar-display-1" format="rectangle" />
 
       {/* Ad Card 2: Free Agency Margin & Profitability Tools */}
       <div 

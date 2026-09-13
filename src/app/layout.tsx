@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import Script from 'next/script';
 import Navigation from './components/Navigation';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -25,8 +26,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+
   return (
     <html lang="en">
+      <head>
+        {adsenseClient && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
+      </head>
       <body className={inter.className}>
         <Navigation />
         <main className="page-container">{children}</main>
