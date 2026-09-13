@@ -242,27 +242,45 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Card 2: UX Auditor Agent */}
+          {/* Card 2: Agency Profitability & Margin Calculators */}
           <div className="hub-card" style={{ gridColumn: 'span 6', backgroundColor: '#ffffff' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-              <span className="mono-label" style={{ color: '#2563eb', fontWeight: 700 }}>Autonomous Agent</span>
+              <span className="mono-label" style={{ color: '#2563eb', fontWeight: 700 }}>Free Web Tool Suite</span>
               <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>•</span>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Production Internal</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Live Utility</span>
             </div>
 
             <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '0.5rem' }}>
-              UX Auditor Agent
+              Agency Margin &amp; Profitability Tools
             </h3>
 
             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
-              Autonomous design system sentinel and visual QA auditor. Inspects web application releases for broken responsive viewports, contrast regressions, and hardcoded design tokens before deployment.
+              Interactive calculators for studio operators and founders. Benchmark retainer burn rates, unbilled micro-task leakage, loaded hourly cost rates, and clean raw timesheet CSVs without signing up.
             </p>
 
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Headless Playwright</span>
-              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Gemini Vision Engine</span>
-              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Token Linter</span>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
+              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Timesheet Friction</span>
+              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>Retainer Burn</span>
+              <span style={{ backgroundColor: 'var(--bg-card-muted)', padding: '0.2rem 0.5rem', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>CSV Sanitizer</span>
             </div>
+
+            <a
+              href="https://velotime.dg.tools/tools"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                color: '#0f172a',
+                textDecoration: 'underline'
+              }}
+            >
+              <span>Explore Free Calculators</span>
+              <ArrowUpRight size={13} />
+            </a>
           </div>
 
           {/* Card 3: Quick-Matrix Extension */}

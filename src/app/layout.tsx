@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: 'dg.tools | Independent Software Foundry by Dustin Gray',
-  description: 'Independent software tools, autonomous developer agents, and daily creative experiments built with obsessive craft. Home of VeloTime, UX Auditor Agent, and daily creative challenges.',
+  description: 'Independent software tools and daily creative experiments built with obsessive craft. Home of VeloTime, daily designer challenges, and agency margin tools.',
   openGraph: {
     title: 'dg.tools | Software Foundry by Dustin Gray',
-    description: 'Independent software tools, autonomous developer agents, and daily creative experiments built with obsessive craft.',
+    description: 'Independent software tools and daily creative experiments built with obsessive craft. Home of VeloTime and daily designer challenges.',
     url: 'https://dg.tools',
     siteName: 'dg.tools',
   },
