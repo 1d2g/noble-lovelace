@@ -57,9 +57,11 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  return glossaryTerms.flatMap((t) => [
+  const params = glossaryTerms.flatMap((t) => [
     { slug: t.slug, term: t.slug }
   ]);
+  params.push({ slug: 'unbilled-wip', term: 'unbilled-wip' });
+  return params;
 }
 
 export default async function GlossaryTermPage({ params }) {
