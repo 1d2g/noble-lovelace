@@ -473,6 +473,7 @@ export function CostComparisonWidget() {
   const weeklyWastedHoursPerEmployee = 1.5;
   const annualWastedHours = employees * weeklyWastedHoursPerEmployee * 50; // 50 weeks
   const annualLeakedRevenue = annualWastedHours * hourlyRate;
+  const formatNumber = (num: number) => Math.round(Number(num) || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   return (
     <div className={`${styles.bentoCard} ${styles.comparisonCard}`}>
@@ -510,7 +511,7 @@ export function CostComparisonWidget() {
 
       <div style={{ marginTop: '1.5rem', padding: '1rem', backgroundColor: 'var(--bg-main)', border: '2px solid var(--text-primary)' }}>
         <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>Annual Leaked Revenue</p>
-        <p style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)' }}>${annualLeakedRevenue.toLocaleString()}</p>
+        <p style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)' }}>${formatNumber(annualLeakedRevenue)}</p>
         <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Based on {weeklyWastedHoursPerEmployee} hours wasted per week per employee on manual time tracking.</p>
       </div>
 

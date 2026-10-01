@@ -42,6 +42,84 @@ export default function RootLayout({
             />
           </>
         )}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Defensive shield against corrupted OS/browser locale packs
+              try {
+                if (typeof Number !== 'undefined' && Number.prototype.toLocaleString) {
+                  var origNumLocale = Number.prototype.toLocaleString;
+                  Number.prototype.toLocaleString = function(locales, options) {
+                    try {
+                      return origNumLocale.call(this, locales || 'en-US', options);
+                    } catch (err) {
+                      var parts = String(this).split('.');
+                      parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
+                      return parts.join('.');
+                    }
+                  };
+                }
+                if (typeof Date !== 'undefined') {
+                  if (Date.prototype.toLocaleDateString) {
+                    var origDateLocale = Date.prototype.toLocaleDateString;
+                    Date.prototype.toLocaleDateString = function(locales, options) {
+                      try {
+                        return origDateLocale.call(this, locales || 'en-US', options);
+                      } catch (err) {
+                        return this.toDateString ? this.toDateString() : '';
+                      }
+                    };
+                  }
+                  if (Date.prototype.toLocaleTimeString) {
+                    var origTimeLocale = Date.prototype.toLocaleTimeString;
+                    Date.prototype.toLocaleTimeString = function(locales, options) {
+                      try {
+                        return origTimeLocale.call(this, locales || 'en-US', options);
+                      } catch (err) {
+                        return this.toTimeString ? this.toTimeString().split(' ')[0] : '';
+                      }
+                    };
+                  }
+                }
+                if (typeof Intl !== 'undefined') {
+                  if (Intl.NumberFormat) {
+                    var OrigNumberFormat = Intl.NumberFormat;
+                    Intl.NumberFormat = function(locales, options) {
+                      try {
+                        return new OrigNumberFormat(locales || 'en-US', options);
+                      } catch (err) {
+                        return {
+                          format: function(n) {
+                            var isCurrency = options && options.style === 'currency';
+                            var parts = String(Math.round(Number(n) || 0)).split('.');
+                            parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ',');
+                            return (isCurrency ? '$' : '') + parts.join('.');
+                          }
+                        };
+                      }
+                    };
+                    Intl.NumberFormat.prototype = OrigNumberFormat.prototype;
+                  }
+                  if (Intl.DateTimeFormat) {
+                    var OrigDateTimeFormat = Intl.DateTimeFormat;
+                    Intl.DateTimeFormat = function(locales, options) {
+                      try {
+                        return new OrigDateTimeFormat(locales || 'en-US', options);
+                      } catch (err) {
+                        return {
+                          format: function(d) {
+                            return d instanceof Date ? d.toDateString() : String(d);
+                          }
+                        };
+                      }
+                    };
+                    Intl.DateTimeFormat.prototype = OrigDateTimeFormat.prototype;
+                  }
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
       </head>
       <body className={inter.className}>
         <Navigation />
